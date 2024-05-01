@@ -1,6 +1,8 @@
-import { View, Text, ImageBackground, Image } from 'react-native'
+import { View, Text, ImageBackground, Image, ActivityIndicator } from 'react-native'
 import React from 'react'
 import { appInfo } from '../constants/appInfo'
+import { SpaceComponent } from '../components'
+import { appColors } from '../constants/appColors'
 
 const SplashScreen = () => {
   return (
@@ -17,6 +19,11 @@ const SplashScreen = () => {
 
       }}
       />
+
+      <SpaceComponent height={16}/>
+
+      {/* Loading indicator */}
+      <ActivityIndicator color={appColors.gray} size={22}/>
     </ImageBackground>
   )
 }
