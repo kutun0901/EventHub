@@ -4,8 +4,10 @@ import { globalStyles } from '../../styles/globalStyles'
 import Swiper from 'react-native-swiper'
 import { appInfo } from '../../constants/appInfo'
 import { appColors } from '../../constants/appColors'
+import { TextComponent } from '../../components'
+import { fontFamily } from '../../constants/fontFamily'
 
-const OnBoardingScreen = ({navigation}: any) => {
+const OnBoardingScreen = ({ navigation }: any) => {
   const [index, setIndex] = useState(0)
 
 
@@ -15,35 +17,36 @@ const OnBoardingScreen = ({navigation}: any) => {
 
       {/* Swiper library is for onboarding design */}
       <Swiper style={{}} loop={false}
-      onIndexChanged={num => {setIndex(num)
-      }}
-      index={index}
-      activeDotColor={appColors.white}
+        onIndexChanged={num => {
+          setIndex(num)
+        }}
+        index={index}
+        activeDotColor={appColors.white}
       >
-          <Image source={require('../../assets/images/onboarding-1.png')}
+        <Image source={require('../../assets/images/onboarding-1.png')}
           style={{
             flex: 1,
             width: appInfo.sizes.WIDTH,
             height: appInfo.sizes.HEIGHT,
             resizeMode: 'cover',
           }}
-          />
-          <Image source={require('../../assets/images/onboarding-2.png')}
+        />
+        <Image source={require('../../assets/images/onboarding-2.png')}
           style={{
             flex: 1,
             width: appInfo.sizes.WIDTH,
             height: appInfo.sizes.HEIGHT,
             resizeMode: 'cover',
           }}
-          />
-          <Image source={require('../../assets/images/onboarding-3.png')}
+        />
+        <Image source={require('../../assets/images/onboarding-3.png')}
           style={{
             flex: 1,
             width: appInfo.sizes.WIDTH,
             height: appInfo.sizes.HEIGHT,
             resizeMode: 'cover',
           }}
-          />
+        />
       </Swiper>
       <View style={[{
         paddingHorizontal: 16,
@@ -57,10 +60,15 @@ const OnBoardingScreen = ({navigation}: any) => {
         alignItems: 'center'
       }]}>
         <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
-          <Text  style={[styles.text, {color: appColors.gray2}]}>Skip</Text>
+          <TextComponent text='Skip' color={appColors.gray2}
+            font={fontFamily.medium}
+          />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => index < 2 ? setIndex(index + 1) : navigation.navigate('LoginScreen')}>
-          <Text style={[styles.text]}>Next</Text>
+          <TextComponent text='Next' color={appColors.white}
+            font={fontFamily.medium}
+
+          />
         </TouchableOpacity>
       </View>
     </View>
