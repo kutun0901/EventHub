@@ -12,5 +12,16 @@ export const globalStyles = StyleSheet.create({
         fontFamily: fontFamily.regular,
         fontSize: 14,
         color: appColors.white,
+    },
+
+    button: {
+        borderRadius: 12,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: appColors.white,
+        paddingHorizontal: 16,
+        paddingVertical: 16,
+        minHeight: 56,
+        flexDirection: 'row'
     }
 })

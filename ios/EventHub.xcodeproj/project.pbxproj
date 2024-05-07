@@ -9,17 +9,36 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* EventHubTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* EventHubTests.m */; };
 		0C80B921A6F3F58F76C31292 /* libPods-EventHub.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-EventHub.a */; };
+		0E787055F5F843AEAB6331E9 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69ED4107C2C64700AB073101 /* Fontisto.ttf */; };
+		0FD2FA20B8F449ED9C8EB1FB /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E332C9A8810749F0A107777D /* MaterialIcons.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		7699B88040F8A987B510C191 /* libPods-EventHub-EventHubTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-EventHub-EventHubTests.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		3E2E165E5CCB470AA05367D2 /* AirbnbCereal_W_Bd.otf in Resources */ = {isa = PBXBuildFile; fileRef = BE57CCDF1D864E75B6AC3969 /* AirbnbCereal_W_Bd.otf */; };
-		37E8A7095CC44EEB9AF62EFC /* AirbnbCereal_W_Bk.otf in Resources */ = {isa = PBXBuildFile; fileRef = 57E1A8738ADA4588B7B931D3 /* AirbnbCereal_W_Bk.otf */; };
+		1E33EA74626B491289C9CBA0 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED14DA332A9D43B0A981BA07 /* FontAwesome5_Brands.ttf */; };
 		23E856A707584A788FC3BABD /* AirbnbCereal_W_Blk.otf in Resources */ = {isa = PBXBuildFile; fileRef = B730B3E82AF348019543FB9C /* AirbnbCereal_W_Blk.otf */; };
-		C276245D70CF4F46A4A23487 /* AirbnbCereal_W_Lt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 94F2DC4581C34CCE86F6C2DF /* AirbnbCereal_W_Lt.otf */; };
 		244C0F84938C4C1EA7629562 /* AirbnbCereal_W_Md.otf in Resources */ = {isa = PBXBuildFile; fileRef = C70BFDC7A51C4CF29ECB3D30 /* AirbnbCereal_W_Md.otf */; };
+		30EC55F6F0874EA9A65EFE14 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D100D3C375AD42AC8B296000 /* SimpleLineIcons.ttf */; };
+		34BFC7BF257B474E9460D78E /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37EDFBA4E10F4D90801DD281 /* FontAwesome.ttf */; };
+		363A889A753442DBB91F274F /* FontAwesome6_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8784E198453043DFB4DE9441 /* FontAwesome6_Regular.ttf */; };
+		3714378102B6485AB439BAE3 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F15CA2012BB4E4989F382D6 /* Foundation.ttf */; };
+		37E8A7095CC44EEB9AF62EFC /* AirbnbCereal_W_Bk.otf in Resources */ = {isa = PBXBuildFile; fileRef = 57E1A8738ADA4588B7B931D3 /* AirbnbCereal_W_Bk.otf */; };
+		3E2E165E5CCB470AA05367D2 /* AirbnbCereal_W_Bd.otf in Resources */ = {isa = PBXBuildFile; fileRef = BE57CCDF1D864E75B6AC3969 /* AirbnbCereal_W_Bd.otf */; };
+		41F44A235E604BDB9F805901 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AEEB2D7480FF45E2AC933B68 /* Octicons.ttf */; };
+		499EAA0C547246378F4CCFB1 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF671D50E28548B7A9C9C15E /* EvilIcons.ttf */; };
 		4D3DE2608AD146869BE1CDA5 /* AirbnbCereal_W_XBd.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3470048329B945D7B78720D6 /* AirbnbCereal_W_XBd.otf */; };
+		5E7F0E7545CA43DCBD7258DE /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0E58CC5F5D4AD89500BF05 /* Zocial.ttf */; };
+		699B47FEFD5141598435DAF1 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B7FC6E9053494661A66FA8B5 /* Entypo.ttf */; };
+		6BBD8ACFE3E44B3395C75755 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12EB135158A24DAFB8D5DD86 /* AntDesign.ttf */; };
+		6F88AB16BEE5483FB8705794 /* FontAwesome6_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B8BB84D3C934F2C8993CCD2 /* FontAwesome6_Solid.ttf */; };
+		7699B88040F8A987B510C191 /* libPods-EventHub-EventHubTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-EventHub-EventHubTests.a */; };
+		7D9BE255468B4DD78A6B3B80 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85A5AFB1D64C43529EAA9C41 /* FontAwesome5_Regular.ttf */; };
+		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		9047D9E109B2454AAB8E05E1 /* FontAwesome6_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FDF94290BA1A4C87BC2CF6C9 /* FontAwesome6_Brands.ttf */; };
+		A2018703DCD04CFBA5CC9B64 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9DE44AA1C55C45DAA6516F9A /* Ionicons.ttf */; };
+		BE0124898DDD4240BF93B77F /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B710DDBF030464B876861E7 /* MaterialCommunityIcons.ttf */; };
+		C276245D70CF4F46A4A23487 /* AirbnbCereal_W_Lt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 94F2DC4581C34CCE86F6C2DF /* AirbnbCereal_W_Lt.otf */; };
+		CCEBD42DE1EF45949495A36A /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98303F464D7840A0AFE29520 /* Feather.ttf */; };
+		F89C7F5A00504FE4B376A032 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FC9D444D3164F5CA2F7E641 /* FontAwesome5_Solid.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +55,7 @@
 		00E356EE1AD99517003FC87E /* EventHubTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EventHubTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* EventHubTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventHubTests.m; sourceTree = "<group>"; };
+		12EB135158A24DAFB8D5DD86 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = ../assets/fonts/AntDesign.ttf; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* EventHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = EventHub/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = EventHub/AppDelegate.mm; sourceTree = "<group>"; };
@@ -44,19 +64,37 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = EventHub/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = EventHub/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-EventHub-EventHubTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EventHub-EventHubTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B8BB84D3C934F2C8993CCD2 /* FontAwesome6_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome6_Solid.ttf; path = ../assets/fonts/FontAwesome6_Solid.ttf; sourceTree = "<group>"; };
+		1F15CA2012BB4E4989F382D6 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = ../assets/fonts/Foundation.ttf; sourceTree = "<group>"; };
+		2F0E58CC5F5D4AD89500BF05 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = ../assets/fonts/Zocial.ttf; sourceTree = "<group>"; };
+		3470048329B945D7B78720D6 /* AirbnbCereal_W_XBd.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = AirbnbCereal_W_XBd.otf; path = ../assets/fonts/AirbnbCereal_W_XBd.otf; sourceTree = "<group>"; };
+		37EDFBA4E10F4D90801DD281 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = ../assets/fonts/FontAwesome.ttf; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-EventHub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventHub.debug.xcconfig"; path = "Target Support Files/Pods-EventHub/Pods-EventHub.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-EventHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventHub.release.xcconfig"; path = "Target Support Files/Pods-EventHub/Pods-EventHub.release.xcconfig"; sourceTree = "<group>"; };
+		57E1A8738ADA4588B7B931D3 /* AirbnbCereal_W_Bk.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = AirbnbCereal_W_Bk.otf; path = ../assets/fonts/AirbnbCereal_W_Bk.otf; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-EventHub-EventHubTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventHub-EventHubTests.debug.xcconfig"; path = "Target Support Files/Pods-EventHub-EventHubTests/Pods-EventHub-EventHubTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-EventHub.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EventHub.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		69ED4107C2C64700AB073101 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = ../assets/fonts/Fontisto.ttf; sourceTree = "<group>"; };
+		6FC9D444D3164F5CA2F7E641 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = ../assets/fonts/FontAwesome5_Solid.ttf; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = EventHub/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		85A5AFB1D64C43529EAA9C41 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = ../assets/fonts/FontAwesome5_Regular.ttf; sourceTree = "<group>"; };
+		8784E198453043DFB4DE9441 /* FontAwesome6_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome6_Regular.ttf; path = ../assets/fonts/FontAwesome6_Regular.ttf; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-EventHub-EventHubTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventHub-EventHubTests.release.xcconfig"; path = "Target Support Files/Pods-EventHub-EventHubTests/Pods-EventHub-EventHubTests.release.xcconfig"; sourceTree = "<group>"; };
+		8B710DDBF030464B876861E7 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = ../assets/fonts/MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
+		94F2DC4581C34CCE86F6C2DF /* AirbnbCereal_W_Lt.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = AirbnbCereal_W_Lt.otf; path = ../assets/fonts/AirbnbCereal_W_Lt.otf; sourceTree = "<group>"; };
+		98303F464D7840A0AFE29520 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = ../assets/fonts/Feather.ttf; sourceTree = "<group>"; };
+		9DE44AA1C55C45DAA6516F9A /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = ../assets/fonts/Ionicons.ttf; sourceTree = "<group>"; };
+		AEEB2D7480FF45E2AC933B68 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = ../assets/fonts/Octicons.ttf; sourceTree = "<group>"; };
+		B730B3E82AF348019543FB9C /* AirbnbCereal_W_Blk.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = AirbnbCereal_W_Blk.otf; path = ../assets/fonts/AirbnbCereal_W_Blk.otf; sourceTree = "<group>"; };
+		B7FC6E9053494661A66FA8B5 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = ../assets/fonts/Entypo.ttf; sourceTree = "<group>"; };
+		BE57CCDF1D864E75B6AC3969 /* AirbnbCereal_W_Bd.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = AirbnbCereal_W_Bd.otf; path = ../assets/fonts/AirbnbCereal_W_Bd.otf; sourceTree = "<group>"; };
+		C70BFDC7A51C4CF29ECB3D30 /* AirbnbCereal_W_Md.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = AirbnbCereal_W_Md.otf; path = ../assets/fonts/AirbnbCereal_W_Md.otf; sourceTree = "<group>"; };
+		D100D3C375AD42AC8B296000 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = ../assets/fonts/SimpleLineIcons.ttf; sourceTree = "<group>"; };
+		E332C9A8810749F0A107777D /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = ../assets/fonts/MaterialIcons.ttf; sourceTree = "<group>"; };
+		ED14DA332A9D43B0A981BA07 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = ../assets/fonts/FontAwesome5_Brands.ttf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		BE57CCDF1D864E75B6AC3969 /* AirbnbCereal_W_Bd.otf */ = {isa = PBXFileReference; name = "AirbnbCereal_W_Bd.otf"; path = "../assets/fonts/AirbnbCereal_W_Bd.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		57E1A8738ADA4588B7B931D3 /* AirbnbCereal_W_Bk.otf */ = {isa = PBXFileReference; name = "AirbnbCereal_W_Bk.otf"; path = "../assets/fonts/AirbnbCereal_W_Bk.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		B730B3E82AF348019543FB9C /* AirbnbCereal_W_Blk.otf */ = {isa = PBXFileReference; name = "AirbnbCereal_W_Blk.otf"; path = "../assets/fonts/AirbnbCereal_W_Blk.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		94F2DC4581C34CCE86F6C2DF /* AirbnbCereal_W_Lt.otf */ = {isa = PBXFileReference; name = "AirbnbCereal_W_Lt.otf"; path = "../assets/fonts/AirbnbCereal_W_Lt.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		C70BFDC7A51C4CF29ECB3D30 /* AirbnbCereal_W_Md.otf */ = {isa = PBXFileReference; name = "AirbnbCereal_W_Md.otf"; path = "../assets/fonts/AirbnbCereal_W_Md.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		3470048329B945D7B78720D6 /* AirbnbCereal_W_XBd.otf */ = {isa = PBXFileReference; name = "AirbnbCereal_W_XBd.otf"; path = "../assets/fonts/AirbnbCereal_W_XBd.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EF671D50E28548B7A9C9C15E /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = ../assets/fonts/EvilIcons.ttf; sourceTree = "<group>"; };
+		FDF94290BA1A4C87BC2CF6C9 /* FontAwesome6_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome6_Brands.ttf; path = ../assets/fonts/FontAwesome6_Brands.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,7 +202,7 @@
 			sourceTree = "<group>";
 		};
 		D549459438EA41B794FAE3CE /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				BE57CCDF1D864E75B6AC3969 /* AirbnbCereal_W_Bd.otf */,
 				57E1A8738ADA4588B7B931D3 /* AirbnbCereal_W_Bk.otf */,
@@ -172,10 +210,29 @@
 				94F2DC4581C34CCE86F6C2DF /* AirbnbCereal_W_Lt.otf */,
 				C70BFDC7A51C4CF29ECB3D30 /* AirbnbCereal_W_Md.otf */,
 				3470048329B945D7B78720D6 /* AirbnbCereal_W_XBd.otf */,
+				12EB135158A24DAFB8D5DD86 /* AntDesign.ttf */,
+				B7FC6E9053494661A66FA8B5 /* Entypo.ttf */,
+				EF671D50E28548B7A9C9C15E /* EvilIcons.ttf */,
+				98303F464D7840A0AFE29520 /* Feather.ttf */,
+				37EDFBA4E10F4D90801DD281 /* FontAwesome.ttf */,
+				ED14DA332A9D43B0A981BA07 /* FontAwesome5_Brands.ttf */,
+				85A5AFB1D64C43529EAA9C41 /* FontAwesome5_Regular.ttf */,
+				6FC9D444D3164F5CA2F7E641 /* FontAwesome5_Solid.ttf */,
+				FDF94290BA1A4C87BC2CF6C9 /* FontAwesome6_Brands.ttf */,
+				8784E198453043DFB4DE9441 /* FontAwesome6_Regular.ttf */,
+				1B8BB84D3C934F2C8993CCD2 /* FontAwesome6_Solid.ttf */,
+				69ED4107C2C64700AB073101 /* Fontisto.ttf */,
+				1F15CA2012BB4E4989F382D6 /* Foundation.ttf */,
+				9DE44AA1C55C45DAA6516F9A /* Ionicons.ttf */,
+				8B710DDBF030464B876861E7 /* MaterialCommunityIcons.ttf */,
+				E332C9A8810749F0A107777D /* MaterialIcons.ttf */,
+				AEEB2D7480FF45E2AC933B68 /* Octicons.ttf */,
+				D100D3C375AD42AC8B296000 /* SimpleLineIcons.ttf */,
+				2F0E58CC5F5D4AD89500BF05 /* Zocial.ttf */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
 			path = "";
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -278,6 +335,25 @@
 				C276245D70CF4F46A4A23487 /* AirbnbCereal_W_Lt.otf in Resources */,
 				244C0F84938C4C1EA7629562 /* AirbnbCereal_W_Md.otf in Resources */,
 				4D3DE2608AD146869BE1CDA5 /* AirbnbCereal_W_XBd.otf in Resources */,
+				6BBD8ACFE3E44B3395C75755 /* AntDesign.ttf in Resources */,
+				699B47FEFD5141598435DAF1 /* Entypo.ttf in Resources */,
+				499EAA0C547246378F4CCFB1 /* EvilIcons.ttf in Resources */,
+				CCEBD42DE1EF45949495A36A /* Feather.ttf in Resources */,
+				34BFC7BF257B474E9460D78E /* FontAwesome.ttf in Resources */,
+				1E33EA74626B491289C9CBA0 /* FontAwesome5_Brands.ttf in Resources */,
+				7D9BE255468B4DD78A6B3B80 /* FontAwesome5_Regular.ttf in Resources */,
+				F89C7F5A00504FE4B376A032 /* FontAwesome5_Solid.ttf in Resources */,
+				9047D9E109B2454AAB8E05E1 /* FontAwesome6_Brands.ttf in Resources */,
+				363A889A753442DBB91F274F /* FontAwesome6_Regular.ttf in Resources */,
+				6F88AB16BEE5483FB8705794 /* FontAwesome6_Solid.ttf in Resources */,
+				0E787055F5F843AEAB6331E9 /* Fontisto.ttf in Resources */,
+				3714378102B6485AB439BAE3 /* Foundation.ttf in Resources */,
+				A2018703DCD04CFBA5CC9B64 /* Ionicons.ttf in Resources */,
+				BE0124898DDD4240BF93B77F /* MaterialCommunityIcons.ttf in Resources */,
+				0FD2FA20B8F449ED9C8EB1FB /* MaterialIcons.ttf in Resources */,
+				41F44A235E604BDB9F805901 /* Octicons.ttf in Resources */,
+				30EC55F6F0874EA9A65EFE14 /* SimpleLineIcons.ttf in Resources */,
+				5E7F0E7545CA43DCBD7258DE /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,6 +626,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CC = "";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -577,6 +654,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CXX = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
@@ -596,6 +674,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD = "";
+				LDPLUSPLUS = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -615,7 +695,13 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				USE_HERMES = true;
 			};
 			name = Debug;
 		};
@@ -623,6 +709,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CC = "";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -650,6 +737,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				CXX = "";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
@@ -662,6 +750,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD = "";
+				LDPLUSPLUS = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -680,7 +770,13 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				USE_HERMES = true;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
