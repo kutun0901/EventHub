@@ -1,9 +1,9 @@
-import { View, Text, TextInput, StyleSheet } from 'react-native'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { ReactNode, useState } from 'react'
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { EyeSlash } from 'iconsax-react-native';
 import { appColors } from '../constants/appColors';
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import { globalStyles } from '../styles/globalStyles';
 
 interface Props {
     value: string,
@@ -13,13 +13,13 @@ interface Props {
     suffix?: ReactNode,
     isPassword?: boolean,
     allowClear?: boolean,
-
+    type?: KeyBoardType
 }
 
 
 const InputComponent = (props: Props) => {
 
-    const {value, onChange, prefix, suffix, placeHolder, isPassword, allowClear} = props;
+    const {value, onChange, prefix, suffix, placeHolder, isPassword, type, allowClear} = props;
 
     // to make show password work
     const [isShowPass, setIsShowPass] = useState(isPassword ?? false)
@@ -28,10 +28,12 @@ const InputComponent = (props: Props) => {
     <View style={styles.inputContainer}>
         {prefix ?? prefix}
 
-        <TextInput
+        <TextInput style={[styles.input, globalStyles.text]}
         value={value}
         placeholder={placeHolder}
+        placeholderTextColor={'#747688'}
         onChangeText={val => onChange(val)}
+        keyboardType={type ?? 'default'}
         secureTextEntry={isShowPass} //hide the password input
         />
 
@@ -39,9 +41,11 @@ const InputComponent = (props: Props) => {
         <TouchableOpacity onPress={isPassword ? () => setIsShowPass(!isShowPass) : () => onChange('')} >
 
         {isPassword ? (
-            <EyeSlash size={22} color={appColors.gray} />
+            <FontAwesome name={isShowPass ? 'eye-slash' : 'eye'}
+            size={22}
+            color={appColors.gray} />
         ) : (
-            value.length > 0 && (
+            value.length > 0 && allowClear && (
             <AntDesign name='close' size={22} color={appColors.text} />
         )
         )}
@@ -57,7 +61,20 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         borderRadius: 12,
         borderWidth: 1,
-        borderColor: appColors.gray,
+        borderColor: appColors.gray3,
         width: '100%',
+        minHeight: 56,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 15,
+        backgroundColor: appColors.white,
+        marginBottom: 19
+    },
+
+    input: {
+        padding: 0,
+        margin: 0,
+        flex: 1,
+        paddingHorizontal: 14
     }
 })
