@@ -1,6 +1,6 @@
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, Switch } from 'react-native'
 import React, { useState } from 'react'
-import { ButtonComponent, InputComponent, SectionComponent, SpaceComponent, TextComponent } from '../../components'
+import { ButtonComponent, InputComponent, RowComponent, SectionComponent, SpaceComponent, TextComponent } from '../../components'
 import { globalStyles } from '../../styles/globalStyles'
 import { Lock, Sms } from 'iconsax-react-native'
 import { appColors } from '../../constants/appColors'
@@ -11,6 +11,8 @@ const LoginScreen = () => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isRemember, setIsRemember] = useState(true)
+
   return (
     <ContainerComponent isImageBackground isScroll>
       <SectionComponent styles={{
@@ -45,7 +47,18 @@ const LoginScreen = () => {
           allowClear
           prefix={<Lock size={22} color={appColors.gray} />}
         />
+
+        <RowComponent justify='space-between'>
+          <RowComponent>
+          <Switch trackColor={{true: appColors.primary}}
+          thumbColor={appColors.white}
+          value={isRemember} onChange={() => setIsRemember(!isRemember)} />
+          <TextComponent text='Remember me'/>
+          </RowComponent>
+          <ButtonComponent type='text' text='Forgot Password' onPress={() => {}} />
+        </RowComponent>
       </SectionComponent>
+
 
     </ContainerComponent>
   )
