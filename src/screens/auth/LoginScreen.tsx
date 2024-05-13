@@ -6,6 +6,7 @@ import { Lock, Sms } from 'iconsax-react-native'
 import { appColors } from '../../constants/appColors'
 import ContainerComponent from '../../components/ContainerComponent'
 import { fontFamily } from '../../constants/fontFamily'
+import SocialLogin from './components/SocialLogin'
 
 const LoginScreen = () => {
 
@@ -49,17 +50,27 @@ const LoginScreen = () => {
         />
 
         <RowComponent justify='space-between'>
-          <RowComponent>
-          <Switch trackColor={{true: appColors.primary}}
-          thumbColor={appColors.white}
-          value={isRemember} onChange={() => setIsRemember(!isRemember)} />
-          <TextComponent text='Remember me'/>
+          <RowComponent onPress={() => setIsRemember(!isRemember)}>
+            <Switch trackColor={{ true: appColors.primary }}
+              thumbColor={appColors.white}
+              value={isRemember}
+              onChange={() => setIsRemember(!isRemember)} />
+            <TextComponent text='Remember me' />
           </RowComponent>
-          <ButtonComponent type='text' text='Forgot Password' onPress={() => {}} />
+          <ButtonComponent type='text' text='Forgot Password' onPress={() => { }} />
         </RowComponent>
       </SectionComponent>
-
-
+      <SpaceComponent height={16} />
+      <SectionComponent>
+        <ButtonComponent text='SIGN IN' type='primary' />
+      </SectionComponent>
+      <SocialLogin />
+      <SectionComponent>
+          <RowComponent justify='center'>
+            <TextComponent text="Don't have an account?" />
+            <ButtonComponent text='Sign up' type='link'/>
+          </RowComponent>
+      </SectionComponent>
     </ContainerComponent>
   )
 }
