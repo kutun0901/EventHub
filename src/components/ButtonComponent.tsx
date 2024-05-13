@@ -12,6 +12,7 @@ interface Props {
     color?: string,
     styles?: StyleProp<ViewStyle>, //define the style props for components that render views or containers
     textColor?: string,
+    textFont?: string,
     textStyles?: StyleProp<TextStyle>, //used to define the style props for components that render text, such as <Text> components in React Native.
     onPress?: () => void,
     iconFlex?: 'right' | 'left'
@@ -19,7 +20,7 @@ interface Props {
 
 const ButtonComponent = (props: Props) => {
 
-    const { icon, text, type, color, styles, textColor, iconFlex, textStyles, onPress } = props
+    const { icon, text, type, color, styles, textColor, textFont, iconFlex, textStyles, onPress } = props
 
     return (
 
@@ -27,8 +28,10 @@ const ButtonComponent = (props: Props) => {
             <TouchableOpacity
                 onPress={onPress}
                 style={[globalStyles.button,
+                    globalStyles.shadow,
                 {
-                    backgroundColor: color ?? appColors.primary
+                    backgroundColor: color ?? appColors.primary,
+                    marginBottom: 17,
                 },
                     styles]} >
                 {icon && iconFlex === 'left' && icon}
@@ -39,7 +42,7 @@ const ButtonComponent = (props: Props) => {
                             marginLeft: icon ? 12 : 0,
                             fontSize: 16,
                         }]}
-                    font={fontFamily.medium}
+                    font={textFont ?? fontFamily.medium}
                     flex={icon && iconFlex === 'right' ? 1 : 0}
                 />
                 {icon && iconFlex === 'right' && icon}
