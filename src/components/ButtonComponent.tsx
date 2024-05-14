@@ -32,6 +32,7 @@ const ButtonComponent = (props: Props) => {
                 {
                     backgroundColor: color ?? appColors.primary,
                     marginBottom: 17,
+                    width: '80%'
                 },
                     styles]} >
                 {icon && iconFlex === 'left' && icon}
