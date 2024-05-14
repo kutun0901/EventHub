@@ -8,30 +8,18 @@ import ContainerComponent from '../../components/ContainerComponent'
 import { fontFamily } from '../../constants/fontFamily'
 import SocialLogin from './components/SocialLogin'
 
-const LoginScreen = ({navigation}: any) => {
+const SignupScreen = ({navigation}: any) => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isRemember, setIsRemember] = useState(true)
 
   return (
-    <ContainerComponent isImageBackground isScroll>
-      <SectionComponent styles={{
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 75,
-      }}>
-        <Image source={require('../../assets/images/text-logo.png')}
-          style={{
-            width: 162,
-            height: 114,
-            marginBottom: 30,
-          }} />
-      </SectionComponent>
+    <ContainerComponent isImageBackground isScroll title='' back>
 
       <SectionComponent>
 
-        <TextComponent text='Sign in' font={fontFamily.medium} size={24} />
+        <TextComponent text='Sign up' font={fontFamily.medium} size={24} />
         <SpaceComponent height={21} />
 
         <InputComponent value={email}
@@ -49,30 +37,23 @@ const LoginScreen = ({navigation}: any) => {
           prefix={<Lock size={22} color={appColors.gray} />}
         />
 
-        <RowComponent justify='space-between'>
-          <RowComponent onPress={() => setIsRemember(!isRemember)}>
-            <Switch trackColor={{ true: appColors.primary }}
-              thumbColor={appColors.white}
-              value={isRemember}
-              onChange={() => setIsRemember(!isRemember)} />
-            <TextComponent text='Remember me' />
-          </RowComponent>
-          <ButtonComponent type='text' text='Forgot Password' onPress={() => { }} />
-        </RowComponent>
+
       </SectionComponent>
       <SpaceComponent height={16} />
       <SectionComponent>
-        <ButtonComponent text='SIGN IN' type='primary' />
+        <ButtonComponent text='SIGN UP' type='primary' />
       </SectionComponent>
       <SocialLogin />
       <SectionComponent>
           <RowComponent justify='center'>
-            <TextComponent text="Don't have an account?" />
-            <ButtonComponent text='Sign up' type='link' onPress={() => navigation.navigate('SignupScreen') }/>
+            <TextComponent text="Already have an account?" />
+            <ButtonComponent text='Sign in'
+            type='link'
+            onPress={() => navigation.navigate('LoginScreen')}/>
           </RowComponent>
       </SectionComponent>
     </ContainerComponent>
   )
 }
 
-export default LoginScreen
+export default SignupScreen
