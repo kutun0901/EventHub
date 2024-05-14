@@ -57,7 +57,7 @@ const LoginScreen = ({navigation}: any) => {
               onChange={() => setIsRemember(!isRemember)} />
             <TextComponent text='Remember me' />
           </RowComponent>
-          <ButtonComponent type='text' text='Forgot Password' onPress={() => { }} />
+          <ButtonComponent type='text' text='Forgot Password' onPress={() => navigation.navigate('ForgotPassword')} />
         </RowComponent>
       </SectionComponent>
       <SpaceComponent height={16} />
