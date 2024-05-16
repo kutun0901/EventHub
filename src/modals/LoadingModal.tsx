@@ -6,25 +6,25 @@ import { TextComponent } from '../components'
 interface Props {
     visible: boolean,
     mess?: string,
-    onClose: () => void
 }
 
 const LoadingModal = (props: Props) => {
 
-    const {visible, onClose, mess} = props;
+    const {visible, mess} = props;
 
   return (
    <Modal visible={visible}
-   style={[globalStyles.container]}
+   style={[{flex: 1}]}
    transparent
    statusBarTranslucent>
     <View style={{
-        backgroundColor: 'coral',
+        flex: 1,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
         justifyContent: 'center',
         alignItems: 'center'
     }}>
-        <ActivityIndicator />
-        <TextComponent text='loading' flex={0}/>
+        <ActivityIndicator color={'#ffffff'}/>
+        <TextComponent text='loading' flex={0} color='#ffffff'/>
     </View>
    </Modal>
   )
