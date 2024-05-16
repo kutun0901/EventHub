@@ -1,3 +1,4 @@
+import { appInfo } from "../constants/appInfo"
 import axiosClient from "./axiosClient"
 
 class AuthAPI {
@@ -6,8 +7,14 @@ class AuthAPI {
         data?: any,
         method?: 'get' | 'put' | 'delete',
     ) => {
-        return await axiosClient('')
+        return await axiosClient(`${appInfo.BASE_URL}/auth${url}`, {
+            method: method ?? 'get',
+            data,
+        })
     }
 }
+
+const authenticationAPI = new AuthAPI();
+export default authenticationAPI;
 
 // untrack file

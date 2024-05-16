@@ -20,7 +20,7 @@ const initialValues = {
 const SignupScreen = ({navigation}: any) => {
 
   const [values, setValues] = useState(initialValues)
-
+  const [isLading, setIsLoading] = useState(false);
 
   // handle when have many fields
   const handleChangeValue = (key: string, value: string) => {
@@ -29,6 +29,16 @@ const SignupScreen = ({navigation}: any) => {
       data[`${key}`] = value;
 
       setValues(data)
+  }
+
+  const handleRegister = async () => {
+    setIsLoading(true)
+    try {
+
+    } catch (error) {
+      console.log(error)
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -69,7 +79,7 @@ const SignupScreen = ({navigation}: any) => {
       </SectionComponent>
       <SpaceComponent height={16} />
       <SectionComponent>
-        <ButtonComponent text='SIGN UP' type='primary' />
+        <ButtonComponent onPress={handleRegister} text='SIGN UP' type='primary' />
       </SectionComponent>
       <SocialLogin />
       <SectionComponent>
