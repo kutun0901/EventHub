@@ -9,6 +9,7 @@ import { fontFamily } from '../../constants/fontFamily'
 import SocialLogin from './components/SocialLogin'
 import { LoadingModal } from '../../modals'
 import authenticationAPI from '../../apis/authApi'
+import { Validate } from '../../utils/validate'
 
 
 // Create form
@@ -44,16 +45,32 @@ const SignupScreen = ({ navigation }: any) => {
 
     const { email, password, confirmPassword } = values;
 
-    if (email && password && confirmPassword) {
-      setIsLoading(true)
-      try {
-        const res = await authenticationAPI.HandleAuthentication('/register', values, 'post')
+    const emailValidation = Validate.email(email)
+    const passwordValidation = Validate.Password(password)
 
-        console.log(res);
-        setIsLoading(false)
-      } catch (error) {
-        console.log(error)
-        setIsLoading(false)
+    if (email && password && confirmPassword) {
+
+
+      if (emailValidation && passwordValidation){
+        setError('')
+        setIsLoading(true)
+        try {
+          const res = await authenticationAPI.HandleAuthentication('/register',
+           {
+            fullName: values.username,
+            email,
+            password
+           },
+           'post')
+
+          console.log(res);
+          setIsLoading(false)
+        } catch (error) {
+          console.log(error)
+          setIsLoading(false)
+        }
+      } else {
+        setError('Invalid email address')
       }
     } else {
       setError('Missing field')

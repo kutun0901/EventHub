@@ -34,6 +34,7 @@ const InputComponent = (props: Props) => {
         placeholderTextColor={'#747688'}
         onChangeText={val => onChange(val)}
         keyboardType={type ?? 'default'}
+        autoCapitalize='none'
         secureTextEntry={isShowPass} //hide the password input
         />
 
