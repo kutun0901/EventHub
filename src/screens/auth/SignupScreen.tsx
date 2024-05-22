@@ -10,7 +10,9 @@ import SocialLogin from './components/SocialLogin'
 import { LoadingModal } from '../../modals'
 import authenticationAPI from '../../apis/authApi'
 import { Validate } from '../../utils/validate'
-
+import {useDispatch} from 'react-redux'
+import { addAuth } from '../../redux/reducers/authReducer'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 // Create form
 const initialValues = {
@@ -25,6 +27,8 @@ const SignupScreen = ({ navigation }: any) => {
   const [values, setValues] = useState(initialValues)
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false);
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (values.email || values.password) {
@@ -63,7 +67,9 @@ const SignupScreen = ({ navigation }: any) => {
            },
            'post')
 
-          console.log(res);
+          dispatch(addAuth(res.data));
+
+          await AsyncStorage.setItem('auth', JSON.stringify(res.data))
           setIsLoading(false)
         } catch (error) {
           console.log(error)
