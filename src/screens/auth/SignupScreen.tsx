@@ -9,7 +9,7 @@ import SocialLogin from './components/SocialLogin'
 import { LoadingModal } from '../../modals'
 import authenticationAPI from '../../apis/authApi'
 import { Validate } from '../../utils/validate'
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addAuth } from '../../redux/reducers/authReducer'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
@@ -21,19 +21,34 @@ const initialValues = {
   confirmPassword: '',
 }
 
+interface ErrorMessages {
+  email: string,
+  password: string,
+  confirmPassword: string,
+}
+
 const SignupScreen = ({ navigation }: any) => {
 
   const [values, setValues] = useState(initialValues)
-  const [error, setError] = useState('')
+  const [errorMessage, setErrorMessageMessage] = useState<any>();
   const [isLoading, setIsLoading] = useState(false);
+  const [isDisable, setIsDisable] = useState(true);
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (values.email || values.password) {
-      setError('')
+    if (
+      !errorMessage ||
+      (errorMessage &&
+        (errorMessage.email ||
+          errorMessage.password ||
+          errorMessage.confirmPassword))
+    ) {
+      setIsDisable(true);
+    } else {
+      setIsDisable(false);
     }
-  }, [values.email, values.password])
+  }, [errorMessage]);
 
   // handle when have many fields
   const handleChangeValue = (key: string, value: string) => {
@@ -43,6 +58,43 @@ const SignupScreen = ({ navigation }: any) => {
 
     setValues(data)
   }
+
+  const formValidator = (key: string) => {
+    const data = {...errorMessage};
+    let message = ``;
+
+    switch (key) {
+      case 'email':
+        if (!values.email) {
+          message = `Email is required!!!`;
+        } else if (!Validate.email(values.email)) {
+          message = 'Email is not invalid!!';
+        } else {
+          message = '';
+        }
+
+        break;
+
+      case 'password':
+        message = !values.password ? `Password is required!!!` : '';
+        break;
+
+      case 'confirmPassword':
+        if (!values.confirmPassword) {
+          message = `Please type confirm password!!`;
+        } else if (values.confirmPassword !== values.password) {
+          message = 'Password is not match!!!';
+        } else {
+          message = '';
+        }
+
+        break;
+    }
+
+    data[`${key}`] = message;
+
+    setErrorMessageMessage(data);
+  };
 
   const handleRegister = async () => {
 
@@ -54,17 +106,17 @@ const SignupScreen = ({ navigation }: any) => {
     if (email && password && confirmPassword) {
 
 
-      if (emailValidation && passwordValidation){
-        setError('')
+      if (emailValidation && passwordValidation) {
+        setErrorMessage('')
         setIsLoading(true)
         try {
           const res = await authenticationAPI.HandleAuthentication('/register',
-           {
-            fullName: values.username,
-            email,
-            password
-           },
-           'post')
+            {
+              fullName: values.username,
+              email,
+              password
+            },
+            'post')
 
           dispatch(addAuth(res.data));
 
@@ -77,10 +129,10 @@ const SignupScreen = ({ navigation }: any) => {
           setIsLoading(false)
         }
       } else {
-        setError('Invalid email address')
+        setErrorMessage('Invalid email address')
       }
     } else {
-      setError('Missing field')
+      setErrorMessage('Missing field')
     }
   }
 
@@ -120,16 +172,29 @@ const SignupScreen = ({ navigation }: any) => {
             isPassword
             prefix={<Lock size={22} color={appColors.gray} />}
           />
-          {
-            error && (
-              <SectionComponent>
-                <TextComponent text={error} color={appColors.alert} />
-              </SectionComponent>)
-          }
+          {errorMessage && (
+          <SectionComponent>
+            {Object.keys(errorMessage).map(
+              (error, index) =>
+                errorMessage[`${error}`] && (
+                  <TextComponent
+                    text={errorMessage[`${error}`]}
+                    key={`error${index}`}
+                    color={appColors.alert}
+                  />
+                ),
+            )}
+          </SectionComponent>
+        )}
         </SectionComponent>
         <SpaceComponent height={16} />
         <SectionComponent>
-          <ButtonComponent onPress={handleRegister} text='SIGN UP' type='primary' />
+          <ButtonComponent
+          onPress={handleRegister}
+          text='SIGN UP'
+          type='primary'
+          disable={isDisable}
+          />
         </SectionComponent>
         <SocialLogin />
         <SectionComponent>

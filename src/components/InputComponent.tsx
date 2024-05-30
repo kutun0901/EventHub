@@ -13,13 +13,14 @@ interface Props {
     suffix?: ReactNode,
     isPassword?: boolean,
     allowClear?: boolean,
-    type?: KeyBoardType
+    type?: KeyBoardType,
+    onEnd?: () => void
 }
 
 
 const InputComponent = (props: Props) => {
 
-    const {value, onChange, prefix, suffix, placeHolder, isPassword, type, allowClear} = props;
+    const {value, onChange, prefix, suffix, placeHolder, isPassword, type, allowClear, onEnd} = props;
 
     // to make show password work
     const [isShowPass, setIsShowPass] = useState(isPassword ?? false)
@@ -35,6 +36,7 @@ const InputComponent = (props: Props) => {
         onChangeText={val => onChange(val)}
         keyboardType={type ?? 'default'}
         autoCapitalize='none'
+        onEndEditing={onEnd}
         secureTextEntry={isShowPass} //hide the password input
         />
 
