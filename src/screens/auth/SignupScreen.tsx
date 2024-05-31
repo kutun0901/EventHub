@@ -30,7 +30,7 @@ interface ErrorMessages {
 const SignupScreen = ({ navigation }: any) => {
 
   const [values, setValues] = useState(initialValues)
-  const [errorMessage, setErrorMessageMessage] = useState<any>();
+  const [errorMessage, setErrorMessage] = useState<any>();
   const [isLoading, setIsLoading] = useState(false);
   const [isDisable, setIsDisable] = useState(true);
 
@@ -42,13 +42,13 @@ const SignupScreen = ({ navigation }: any) => {
       (errorMessage &&
         (errorMessage.email ||
           errorMessage.password ||
-          errorMessage.confirmPassword))
+          errorMessage.confirmPassword)) && (!values.email || !values.password || !values.confirmPassword)
     ) {
       setIsDisable(true);
     } else {
       setIsDisable(false);
     }
-  }, [errorMessage]);
+  }, [errorMessage, values]);
 
   // handle when have many fields
   const handleChangeValue = (key: string, value: string) => {
@@ -93,47 +93,64 @@ const SignupScreen = ({ navigation }: any) => {
 
     data[`${key}`] = message;
 
-    setErrorMessageMessage(data);
+    setErrorMessage(data);
   };
 
   const handleRegister = async () => {
 
-    const { email, password, confirmPassword } = values;
+    const api = '/verification'
 
-    const emailValidation = Validate.email(email)
-    const passwordValidation = Validate.Password(password)
+    setIsLoading(true)
+    try {
+      const res = await authenticationAPI.HandleAuthentication(api, {email: values.email}, 'post')
 
-    if (email && password && confirmPassword) {
+      setIsLoading(false)
 
-
-      if (emailValidation && passwordValidation) {
-        setErrorMessage('')
-        setIsLoading(true)
-        try {
-          const res = await authenticationAPI.HandleAuthentication('/register',
-            {
-              fullName: values.username,
-              email,
-              password
-            },
-            'post')
-
-          dispatch(addAuth(res.data));
-
-          // store it to local storage
-          await AsyncStorage.setItem('auth', JSON.stringify(res.data))
-
-          setIsLoading(false)
-        } catch (error) {
-          console.log(error)
-          setIsLoading(false)
-        }
-      } else {
-        setErrorMessage('Invalid email address')
-      }
-    } else {
-      setErrorMessage('Missing field')
+      navigation.navigate('Verification', {
+        code: res.data.code,
+        email: values.email,
+        password: values.password,
+      })
+    } catch (error) {
+      console.log(error)
     }
+
+    // const { email, password, confirmPassword } = values;
+
+    // const emailValidation = Validate.email(email)
+    // const passwordValidation = Validate.Password(password)
+
+    // if (email && password && confirmPassword) {
+
+
+    //   if (emailValidation && passwordValidation) {
+    //     setErrorMessage('')
+    //     setIsLoading(true)
+    //     try {
+    //       const res = await authenticationAPI.HandleAuthentication('/register',
+    //         {
+    //           fullName: values.username,
+    //           email,
+    //           password
+    //         },
+    //         'post')
+
+    //       dispatch(addAuth(res.data));
+
+    //       // store it to local storage
+    //       await AsyncStorage.setItem('auth', JSON.stringify(res.data))
+
+    //       setIsLoading(false)
+    //     } catch (error) {
+    //       console.log(error)
+    //       setIsLoading(false)
+    //     }
+    //   } else {
+    //     setErrorMessage('Invalid email address')
+    //   }
+    // } else {
+    //   setErrorMessage('Missing field')
+    // }
   }
 
 
