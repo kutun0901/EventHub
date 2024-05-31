@@ -47,4 +47,13 @@ export const globalStyles = StyleSheet.create({
         alignItems: 'center'
     },
 
+    iconContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#3D56F0',
+        width: 30,
+        height: 30,
+        borderRadius: 100,
+      },
+
 })
