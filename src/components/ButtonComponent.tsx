@@ -54,7 +54,8 @@ const ButtonComponent = (props: Props) => {
             </View>
         ) : (
             <TouchableOpacity onPress={onPress}>
-                <TextComponent text={text}
+                <TextComponent flex={0}
+                text={text}
                     color={type === 'link' ? appColors.link : appColors.text}
                 />
             </TouchableOpacity>

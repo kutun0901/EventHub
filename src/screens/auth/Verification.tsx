@@ -7,13 +7,23 @@ import { fontFamily } from '../../constants/fontFamily'
 import { LoadingModal } from '../../modals'
 import { globalStyles } from '../../styles/globalStyles'
 import { ArrowRight } from 'iconsax-react-native'
+import authenticationAPI from '../../apis/authApi'
+import {useDispatch} from 'react-redux'
+import { addAuth } from '../../redux/reducers/authReducer'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Verification = ({ navigation, route }: any) => {
 
-  const { code, email, password } = route.params
+  const { code, email, password, username } = route.params
 
   const [codeValues, setCodeValues] = useState<string[]>([]); //store value from each input
   const [newCode, setNewCode] = useState(''); //combine values from input to string
+  const [limit, setLimit] = useState(120);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [currentCode, setCurrentCode] = useState<string>(code);
+
+  const dispatch = useDispatch();
 
   const ref1 = useRef<any>();
   const ref2 = useRef<any>();
@@ -32,12 +42,79 @@ const Verification = ({ navigation, route }: any) => {
     setNewCode(item);
   }, [codeValues]);
 
+  useEffect(() => {
+    if (limit > 0) {
+      const interval = setInterval(() => {
+        setLimit(limit => limit - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [limit]);
+
 
   const handleChangeCode = (val: string, index: number) => {
     const data = [...codeValues];
     data[index] = val;
 
     setCodeValues(data);
+  };
+
+  const handleResendVerification = async () => {
+    setCodeValues(['', '', '', '']);
+    setNewCode('');
+
+    const api = `/verification`;
+    setIsLoading(true);
+    try {
+      const res: any = await authenticationAPI.HandleAuthentication(
+        api,
+        {email},
+        'post',
+      );
+
+      setLimit(120);
+      setCurrentCode(res.data.code);
+      setIsLoading(false);
+
+      console.log(res.data.code);
+    } catch (error) {
+      setIsLoading(false);
+      console.log(`Can not send verification code ${error}`);
+    }
+  };
+
+  const handleVerification = async () => {
+    if (limit > 0) {
+      if (parseInt(newCode) !== parseInt(currentCode)) {
+        setErrorMessage('Invalid code!!!');
+      } else {
+        setErrorMessage('');
+
+        const api = `/register`;
+        const data = {
+          email,
+          password,
+          username: username ?? '',
+        };
+
+        try {
+          const res: any = await authenticationAPI.HandleAuthentication(
+            api,
+            data,
+            'post',
+          );
+
+          dispatch(addAuth(res.data));
+
+          await AsyncStorage.setItem('auth', JSON.stringify(res.data));
+        } catch (error) {
+          setErrorMessage('User has already exist!!!');
+          console.log(`Can not create new user ${error}`);
+        }
+      }
+    } else {
+      setErrorMessage('Time out verification code, please resend new code!!!');
+    }
   };
 
   return (
