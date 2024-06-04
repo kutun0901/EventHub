@@ -16,7 +16,7 @@ const RowComponent = (props: Props) => {
     activeOpacity={1} //won't gray out the component when click on
     onPress={onPress}
     style={[globalStyles.row, {
-    justifyContent: justify
+    justifyContent: justify ?? 'center'
   }, styles]}>
     {children}
   </TouchableOpacity>

@@ -29,7 +29,10 @@ const ContainerComponent = (props: Props) => {
             {(title || back) && (
                 <RowComponent styles={{
                     paddingHorizontal: 16,
-                    paddingVertical: 8,
+                    paddingVertical: 10,
+                    minWidth: 48,
+                    minHeight: 48,
+                    justifyContent: 'flex-start'
 
                 }}  >
                     {back && (
