@@ -49,6 +49,7 @@ const ForgotPassword = () => {
                 onChange={val => setEmail(val)}
                 prefix={<Sms size={20} color={appColors.gray} />}
                 placeHolder='abc@email.com'
+                onEnd={handleCheckEmail}
             />
         </SectionComponent>
         <SectionComponent>
