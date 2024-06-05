@@ -45,6 +45,7 @@ const SocialLogin = () => {
     }
   };
 
+
   return (
    <SectionComponent>
         <TextComponent
