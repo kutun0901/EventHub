@@ -1,4 +1,5 @@
 import ButtonComponent from "./ButtonComponent";
+import CircleComponent from "./CircleComponent";
 import InputComponent from "./InputComponent";
 import RowComponent from "./RowComponent";
 import SectionComponent from "./SectionComponent";
@@ -12,4 +13,5 @@ export {
     InputComponent,
     SectionComponent,
     RowComponent,
+    CircleComponent,
 }
