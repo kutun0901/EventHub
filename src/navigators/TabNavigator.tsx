@@ -11,6 +11,7 @@ import { AddSquare, Calendar, Location, User } from 'iconsax-react-native'
 import TextComponent from '../components/TextComponent'
 import { globalStyles } from '../styles/globalStyles'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import { CircleComponent } from '../components'
 
 const TabNavigator = () => {
 
