@@ -10,7 +10,7 @@ import { globalStyles } from '../styles/globalStyles';
 import SpaceComponent from './SpaceComponent';
 import {useDispatch, useSelector} from 'react-redux';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {LoginManager} from 'react-native-fbsdk-next';
+// import {LoginManager} from 'react-native-fbsdk-next';
 
 const DrawerCustom = ({navigation}: any) => {
     const user = useSelector(authSelector);
@@ -62,7 +62,7 @@ const DrawerCustom = ({navigation}: any) => {
 
     const handleSignOut = async () => {
       await GoogleSignin.signOut();
-      await LoginManager.logOut();
+    //   await LoginManager.logOut();
       dispatch(removeAuth({}));
       await AsyncStorage.clear();
     };
