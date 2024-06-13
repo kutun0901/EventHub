@@ -5,7 +5,7 @@ import { authSelector, removeAuth } from '../../redux/reducers/authReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {GoogleSignin} from '@react-native-google-signin/google-signin'
 import { CircleComponent, RowComponent, SpaceComponent, TextComponent } from '../../components';
-import { HambergerMenu, Notification } from 'iconsax-react-native';
+import { HambergerMenu, Notification, SearchNormal1, Sort } from 'iconsax-react-native';
 import { appColors } from '../../constants/appColors';
 import { fontFamily } from '../../constants/fontFamily';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
