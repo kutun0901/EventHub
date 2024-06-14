@@ -15,7 +15,7 @@ interface Props {
   }
 
 
-const TagComponent = () => {
+const TagComponent = (props: Props) => {
     const {onPress, label, icon, textColor, bgColor, styles} = props;
 
     return (
