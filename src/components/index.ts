@@ -1,10 +1,12 @@
 import ButtonComponent from "./ButtonComponent";
+import CategoryList from "./CategoryList";
 import CircleComponent from "./CircleComponent";
 import DrawerCustom from "./DrawerCustom";
 import InputComponent from "./InputComponent";
 import RowComponent from "./RowComponent";
 import SectionComponent from "./SectionComponent";
 import SpaceComponent from "./SpaceComponent";
+import TabBarComponent from "./TabBarComponent";
 import TagComponent from "./TagComponent";
 import TextComponent from "./TextComponent";
 
@@ -18,4 +20,7 @@ export {
     CircleComponent,
     DrawerCustom,
     TagComponent,
+    CategoryList,
+    TabBarComponent,
+
 }
