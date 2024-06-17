@@ -1,3 +1,4 @@
+import AvatarGroup from "./AvatarGroup";
 import ButtonComponent from "./ButtonComponent";
 import CardComponent from "./CardComponent";
 import CategoryList from "./CategoryList";
@@ -26,5 +27,6 @@ export {
     TabBarComponent,
     EventItem,
     CardComponent,
+    AvatarGroup,
 
 }
