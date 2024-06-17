@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { authSelector, removeAuth } from '../../redux/reducers/authReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { GoogleSignin } from '@react-native-google-signin/google-signin'
-import { CategoryList, CircleComponent, RowComponent, SectionComponent, SpaceComponent, TabBarComponent, TagComponent, TextComponent } from '../../components';
+import { CategoryList, CircleComponent, EventItem, RowComponent, SectionComponent, SpaceComponent, TabBarComponent, TagComponent, TextComponent } from '../../components';
 import { HambergerMenu, Notification, SearchNormal1, Sort } from 'iconsax-react-native';
 import { appColors } from '../../constants/appColors';
 import { fontFamily } from '../../constants/fontFamily';
@@ -15,6 +15,22 @@ const HomeScreen = ({ navigation }: any) => {
   const dispatch = useDispatch();
 
   const auth = useSelector(authSelector);
+
+  const itemEvent = {
+    title: 'International Band Music Concert',
+    description:
+      'Enjoy your favorite dishe and a lovely your friends and family and have a great time. Food from local food trucks will be available for purchase.',
+    location: {
+      title: 'Gala Convention Center',
+      address: '36 Guild Street London, UK',
+    },
+    imageUrl: '',
+    users: [''],
+    authorId: '',
+    startAt: Date.now(),
+    endAt: Date.now(),
+    date: Date.now(),
+  };
 
   return (
     <View style={[globalStyles.container]}>
@@ -129,13 +145,14 @@ const HomeScreen = ({ navigation }: any) => {
             marginTop: 16,
           },
         ]}>
-        <SectionComponent styles={{paddingHorizontal: 0, paddingTop: 20}}>
-          <TabBarComponent title="Upcoming Events" onPress={() => {}} />
+        <SectionComponent styles={{ paddingHorizontal: 0, paddingTop: 20 }}>
+          <TabBarComponent title="Upcoming Events" onPress={() => { }} />
           <FlatList
+            showsHorizontalScrollIndicator={false}
             horizontal
-            data={Array.from({length: 5})}
-            renderItem={({item, index}) => (
-              <EventItem key={`event${index}`} item={item} type="card" />
+            data={Array.from({ length: 5 })}
+            renderItem={({ item, index }) => (
+              <EventItem key={`event${index}`} item={itemEvent} type="card" />
             )}
           />
         </SectionComponent>
