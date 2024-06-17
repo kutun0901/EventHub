@@ -29,7 +29,7 @@ export const globalStyles = StyleSheet.create({
         shadowColor: 'rgba(0,0,0,0.5)',
         shadowOffset: {
           width: 0,
-          height: 4,
+          height: 6,
         },
         shadowOpacity: 0.25,
         shadowRadius: 8,
@@ -68,6 +68,7 @@ export const globalStyles = StyleSheet.create({
         padding: 12,
         marginHorizontal: 12,
         marginVertical: 6,
+        marginBottom: 16,
       },
 
 })

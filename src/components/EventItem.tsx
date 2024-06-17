@@ -1,9 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import TextComponent from './TextComponent';
+import CardComponent from './CardComponent';
+import { appInfo } from '../constants/appInfo';
+import { EventModel } from '../models/EventModels';
 
 interface Props {
-    item: any;
+    item: EventModel;
     type: 'card' | 'list';
   }
 
@@ -16,7 +19,7 @@ interface Props {
         onPress={() => {}}>
         <TextComponent
           numOfLine={1}
-          text="International Band Music Concert"
+          text={item.title}
           title
           size={18}
         />
