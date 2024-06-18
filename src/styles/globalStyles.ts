@@ -71,4 +71,15 @@ export const globalStyles = StyleSheet.create({
         marginBottom: 16,
       },
 
+      noSpaceCard: {
+        alignItems: 'center',
+        width: 45,
+        margin: 0,
+        padding: 0,
+        marginVertical: 0,
+        marginHorizontal: 0,
+        height: 45,
+        justifyContent: 'center',
+      },
+
 })
