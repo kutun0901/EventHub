@@ -23,11 +23,13 @@ interface Props {
 const EventItem = (props: Props) => {
     const { item, type } = props;
 
+    const navigation: any = useNavigation()
+
     return (
         <CardComponent
             isShadow
             styles={{ width: appInfo.sizes.WIDTH * 0.7 }}
-            onPress={() => { }}>
+            onPress={() => navigation.navigate('EventDetail', {item})}>
             <ImageBackground
                 style={{ flex: 1, marginBottom: 12, height: 131, padding: 10 }}
                 source={require('../assets/images/event-image.png')}

@@ -7,7 +7,7 @@ import { appColors } from '../constants/appColors';
 
 interface Props {
     title: string;
-    onPress: () => void;
+    onPress?: () => void;
   }
 
   const TabBarComponent = (props: Props) => {
