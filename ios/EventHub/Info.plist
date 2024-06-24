@@ -44,7 +44,9 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string>find nearby events<string/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>find nearby events<string/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
