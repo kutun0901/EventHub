@@ -12,6 +12,7 @@ import { Validate } from '../../utils/validate'
 import {useDispatch} from 'react-redux'
 import { addAuth } from '../../redux/reducers/authReducer'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { LoadingModal } from '../../modals'
 
 const LoginScreen = ({ navigation }: any) => {
 
@@ -19,6 +20,8 @@ const LoginScreen = ({ navigation }: any) => {
   const [password, setPassword] = useState('')
   const [isRemember, setIsRemember] = useState(true)
   const [isDisable, setIsDisable] = useState(true)
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const dispatch = useDispatch()
   const emailValidation = Validate.email(email)
@@ -38,6 +41,7 @@ const LoginScreen = ({ navigation }: any) => {
     const emailValidation = Validate.email(email)
 
     if (emailValidation){
+      setIsLoading(true);
       try {
         const res = await authenticationAPI.HandleAuthentication('/login', {
           email, password
@@ -52,6 +56,7 @@ const LoginScreen = ({ navigation }: any) => {
       } catch (error) {
           console.log(error)
       }
+      setIsLoading(false)
     } else {
       Alert.alert('Email is not correct')
     }
@@ -105,7 +110,9 @@ const LoginScreen = ({ navigation }: any) => {
       </SectionComponent>
       <SpaceComponent height={16} />
       <SectionComponent>
-        <ButtonComponent disable={isDisable} onPress={handleLogin} text='SIGN IN' type='primary' />
+        <ButtonComponent disable={isLoading || isDisable}
+        onPress={handleLogin} text='SIGN IN'
+        type='primary' />
       </SectionComponent>
       <SocialLogin />
       <SectionComponent>
@@ -114,6 +121,7 @@ const LoginScreen = ({ navigation }: any) => {
           <ButtonComponent text='Sign up' type='link' onPress={() => navigation.navigate('SignupScreen')} />
         </RowComponent>
       </SectionComponent>
+      <LoadingModal visible={isLoading} />
     </ContainerComponent>
   )
 }
