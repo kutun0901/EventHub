@@ -1,5 +1,5 @@
 import { View, Text, Button, TouchableOpacity, StatusBar, Platform, ScrollView, FlatList, ImageBackground } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { authSelector, removeAuth } from '../../redux/reducers/authReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -10,11 +10,53 @@ import { appColors } from '../../constants/appColors';
 import { fontFamily } from '../../constants/fontFamily';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { globalStyles } from '../../styles/globalStyles';
+import GeoLocation from '@react-native-community/geolocation';
+import axios from 'axios';
+import { AddressModel } from '../../models/AddressModel';
 
 const HomeScreen = ({ navigation }: any) => {
   const dispatch = useDispatch();
 
   const auth = useSelector(authSelector);
+
+  const [addressInfo, setAddressInfo] = useState<AddressModel>();
+
+  useEffect(() => {
+    handleGetCurrentLocation();
+  }, []);
+
+  const handleGetCurrentLocation = async () => {
+    GeoLocation.getCurrentPosition(position => {
+      if (position && position.coords) {
+        handleRevertGeocode({
+          lat: position.coords.latitude,
+          long: position.coords.longitude,
+        });
+      }
+    });
+  };
+
+  const handleRevertGeocode = async ({
+    lat,
+    long,
+  }: {
+    lat: number;
+    long: number;
+  }) => {
+    const api = `https://revgeocode.search.hereapi.com/v1/revgeocode?at=${lat},${long}&lang=en-US&apiKey=0_BR1RgONQUGZ-hwY0Zg-aj1MMjmhr22UeWB4NZJ9qc`;
+    await axios
+      .get(api)
+      .then(res => {
+        if (res && res.status === 200 && res.data) {
+          const items = res.data.items;
+
+          items.length > 0 && setAddressInfo(items[0]);
+        }
+      })
+      .catch(e => {
+        console.log('Error in getAddressFromCoordinates', e);
+      });
+  };
 
   const itemEvent = {
     title: 'International Band Music Concert',
@@ -64,13 +106,15 @@ const HomeScreen = ({ navigation }: any) => {
                   color={appColors.white}
                 />
               </RowComponent>
-              <TextComponent
-                text="New York, USA"
-                flex={0}
-                color={appColors.white}
-                font={fontFamily.medium}
-                size={13}
-              />
+              {addressInfo && (
+                <TextComponent
+                  text={`${addressInfo.address.city}, ${addressInfo.address.countryCode}`}
+                  flex={0}
+                  color={appColors.white}
+                  font={fontFamily.medium}
+                  size={13}
+                />
+              )}
             </View>
 
             <CircleComponent color="#524CE0" size={36}>
