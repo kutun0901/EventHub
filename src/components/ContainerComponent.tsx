@@ -1,4 +1,4 @@
-import { View, Text, ImageBackground, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native'
+import { View, Text, ImageBackground, ScrollView, SafeAreaView, TouchableOpacity, StatusBar } from 'react-native'
 import React, { ReactNode } from 'react'
 import { globalStyles } from '../styles/globalStyles';
 import { useNavigation } from '@react-navigation/native';
@@ -25,7 +25,7 @@ const ContainerComponent = (props: Props) => {
     const navigation = useNavigation();
 
     const headerComponent = () => {
-        return <View style={{ flex: 1, paddingTop: 30 }}>
+        return <View style={{ flex: 1}}>
             {(title || back) && (
                 <RowComponent styles={{
                     paddingHorizontal: 16,
@@ -75,6 +75,7 @@ const ContainerComponent = (props: Props) => {
         </ImageBackground >
     ) : (
         <SafeAreaView style={[globalStyles.container]}>
+            <StatusBar barStyle={'dark-content'}/>
             {headerComponent()}
         </SafeAreaView>
     )

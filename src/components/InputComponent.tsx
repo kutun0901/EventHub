@@ -29,7 +29,7 @@ const InputComponent = (props: Props) => {
     <View style={styles.inputContainer}>
         {prefix ?? prefix}
 
-        <TextInput style={[styles.input, globalStyles.text]}
+        <TextInput style={[styles.input, globalStyles.text, {paddingHorizontal: prefix || suffix ? 12 : 0}]}
         value={value}
         placeholder={placeHolder}
         placeholderTextColor={'#747688'}
@@ -78,6 +78,6 @@ const styles = StyleSheet.create({
         padding: 0,
         margin: 0,
         flex: 1,
-        paddingHorizontal: 14
+        // paddingHorizontal: 14
     }
 })
