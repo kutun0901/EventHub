@@ -6,6 +6,7 @@ import CircleComponent from "./CircleComponent";
 import DrawerCustom from "./DrawerCustom";
 import EventItem from "./EventItem";
 import InputComponent from "./InputComponent";
+import LocationChoice from "./LocationChoice";
 import RowComponent from "./RowComponent";
 import SectionComponent from "./SectionComponent";
 import SpaceComponent from "./SpaceComponent";
@@ -28,5 +29,6 @@ export {
     EventItem,
     CardComponent,
     AvatarGroup,
+    LocationChoice,
 
 }

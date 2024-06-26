@@ -4,6 +4,7 @@ import { appColors } from '../constants/appColors';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { globalStyles } from '../styles/globalStyles';
+import { multiplyMatrices } from 'react-native-svg/lib/typescript/elements/Shape';
 
 interface Props {
     value: string,
@@ -14,47 +15,58 @@ interface Props {
     isPassword?: boolean,
     allowClear?: boolean,
     type?: KeyBoardType,
-    onEnd?: () => void
+    onEnd?: () => void,
+    multiline?: boolean,
+    numberOfLines?: number
 }
 
 
 const InputComponent = (props: Props) => {
 
-    const {value, onChange, prefix, suffix, placeHolder, isPassword, type, allowClear, onEnd} = props;
+    const { multiline, value,
+        onChange, prefix, suffix,
+        placeHolder, isPassword, type,
+        numberOfLines,
+        allowClear, onEnd,
+    } = props;
 
     // to make show password work
     const [isShowPass, setIsShowPass] = useState(isPassword ?? false)
 
-  return (
-    <View style={styles.inputContainer}>
-        {prefix ?? prefix}
+    return (
+        <View style={[styles.inputContainer, {
+            alignItems: multiline ? 'flex-start' : 'center'
+        }]}>
+            {prefix ?? prefix}
 
-        <TextInput style={[styles.input, globalStyles.text, {paddingHorizontal: prefix || suffix ? 12 : 0}]}
-        value={value}
-        placeholder={placeHolder}
-        placeholderTextColor={'#747688'}
-        onChangeText={val => onChange(val)}
-        keyboardType={type ?? 'default'}
-        autoCapitalize='none'
-        onEndEditing={onEnd}
-        secureTextEntry={isShowPass} //hide the password input
-        />
+            <TextInput style={[styles.input, globalStyles.text, { paddingHorizontal: prefix || suffix ? 12 : 0 }]}
+                value={value}
+                multiline={multiline}
+                numberOfLines={numberOfLines}
+                placeholder={placeHolder}
+                placeholderTextColor={'#747688'}
+                onChangeText={val => onChange(val)}
+                keyboardType={type ?? 'default'}
+                autoCapitalize='none'
+                onEndEditing={onEnd}
+                secureTextEntry={isShowPass} //hide the password input
+            />
 
-        {suffix ?? suffix}
-        <TouchableOpacity onPress={isPassword ? () => setIsShowPass(!isShowPass) : () => onChange('')} >
+            {suffix ?? suffix}
+            <TouchableOpacity onPress={isPassword ? () => setIsShowPass(!isShowPass) : () => onChange('')} >
 
-        {isPassword ? (
-            <FontAwesome name={isShowPass ? 'eye-slash' : 'eye'}
-            size={22}
-            color={appColors.gray} />
-        ) : (
-            value.length > 0 && allowClear && (
-            <AntDesign name='close' size={22} color={appColors.text} />
-        )
-        )}
-        </TouchableOpacity>
-    </View>
-  )
+                {isPassword ? (
+                    <FontAwesome name={isShowPass ? 'eye-slash' : 'eye'}
+                        size={22}
+                        color={appColors.gray} />
+                ) : (
+                    value.length > 0 && allowClear && (
+                        <AntDesign name='close' size={22} color={appColors.text} />
+                    )
+                )}
+            </TouchableOpacity>
+        </View>
+    )
 }
 
 export default InputComponent
@@ -67,6 +79,7 @@ const styles = StyleSheet.create({
         borderColor: appColors.gray3,
         width: '100%',
         minHeight: 56,
+        paddingVertical: 14,
         justifyContent: 'center',
         alignItems: 'center',
         paddingHorizontal: 15,
