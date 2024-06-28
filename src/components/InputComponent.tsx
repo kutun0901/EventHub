@@ -1,10 +1,9 @@
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, StyleProp, ViewStyle } from 'react-native'
 import React, { ReactNode, useState } from 'react'
 import { appColors } from '../constants/appColors';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { globalStyles } from '../styles/globalStyles';
-import { multiplyMatrices } from 'react-native-svg/lib/typescript/elements/Shape';
 
 interface Props {
     value: string,
@@ -17,7 +16,8 @@ interface Props {
     type?: KeyBoardType,
     onEnd?: () => void,
     multiline?: boolean,
-    numberOfLines?: number
+    numberOfLines?: number,
+    styles?: StyleProp<ViewStyle>
 }
 
 
@@ -27,16 +27,16 @@ const InputComponent = (props: Props) => {
         onChange, prefix, suffix,
         placeHolder, isPassword, type,
         numberOfLines,
-        allowClear, onEnd,
+        allowClear, onEnd, styles
     } = props;
 
     // to make show password work
     const [isShowPass, setIsShowPass] = useState(isPassword ?? false)
 
     return (
-        <View style={[styles.inputContainer, {
+        <View style={[globalStyles.inputContainer, {
             alignItems: multiline ? 'flex-start' : 'center'
-        }]}>
+        }, styles]}>
             {prefix ?? prefix}
 
             <TextInput style={[styles.input, globalStyles.text, { paddingHorizontal: prefix || suffix ? 12 : 0 }]}
