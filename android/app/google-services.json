@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1066130933252",
+    "project_id": "eventhub-425416",
+    "storage_bucket": "eventhub-425416.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1066130933252:android:971a4de1ba647346999751",
+        "android_client_info": {
+          "package_name": "com.EventHub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1066130933252-ichsah6efi0ti4lrpagqkbfph07dvqlh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEzygmaiq4_UCn_dsDi28NPT7s-MuEZBg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1066130933252-ichsah6efi0ti4lrpagqkbfph07dvqlh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1066130933252-mgl56j5hn7avhhgpsg3dip3e7r527g9l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.EventHub"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { ButtonComponent, InputComponent, RowComponent, SpaceComponent, TextComponent } from '../components';
 import { SearchNormal1 } from 'iconsax-react-native';
 import { appColors } from '../constants/appColors';
+import { LocationModel } from '../models/LocationModel';
+import axios from 'axios';
 
 interface Props {
     visible: boolean;
@@ -27,7 +29,7 @@ const LocationModal = (props: Props) => {
     };
 
     const handleSearchLocation = async () => {
-      const api = `https://autocomplete.search.hereapi.com/v1/autocomplete?q=${searchKey}&limit=10&apiKey=0_BR1RgONQUGZ-hwY0Zg-aj1MMjmhr22UeWB4NZJ9qc`;
+      const api = `https://autocomplete.search.hereapi.com/v1/autocomplete?q=${searchKey}&limit=10&apiKey=${process.env.HERE_API_KEY}`;
 
       try {
         setIsLoading(true);
