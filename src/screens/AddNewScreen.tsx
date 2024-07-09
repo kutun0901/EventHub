@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import ContainerComponent from '../components/ContainerComponent';
 import { ButtonComponent, InputComponent, SectionComponent, TextComponent } from '../components';
 import { useSelector } from 'react-redux';
+import { authSelector } from '../redux/reducers/authReducer';
 
 
 const initValues = {

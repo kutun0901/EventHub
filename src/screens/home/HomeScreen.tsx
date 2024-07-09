@@ -43,7 +43,7 @@ const HomeScreen = ({ navigation }: any) => {
     lat: number;
     long: number;
   }) => {
-    const api = `https://revgeocode.search.hereapi.com/v1/revgeocode?at=${lat},${long}&lang=en-US&apiKey=0_BR1RgONQUGZ-hwY0Zg-aj1MMjmhr22UeWB4NZJ9qc`;
+    const api = `https://revgeocode.search.hereapi.com/v1/revgeocode?at=${lat},${long}&lang=en-US&apiKey=${process.env.HERE_API_KEY}`;
     await axios
       .get(api)
       .then(res => {
