@@ -6,5 +6,19 @@ export const appInfo = {
         HEIGHT: Dimensions.get('window').height
     },
 
-    BASE_URL: 'aaa'
+    BASE_URL: 'aaa',
+    monthNames: [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ],
 }
