@@ -3,6 +3,7 @@ import ButtonComponent from "./ButtonComponent";
 import CardComponent from "./CardComponent";
 import CategoryList from "./CategoryList";
 import CircleComponent from "./CircleComponent";
+import DateTimePicker from "./DateTimePicker";
 import DrawerCustom from "./DrawerCustom";
 import EventItem from "./EventItem";
 import InputComponent from "./InputComponent";
@@ -30,5 +31,5 @@ export {
     CardComponent,
     AvatarGroup,
     LocationChoice,
-
+    DateTimePicker,
 }
