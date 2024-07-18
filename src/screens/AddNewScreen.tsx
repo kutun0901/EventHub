@@ -1,9 +1,11 @@
 import { View, Text } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ContainerComponent from '../components/ContainerComponent';
 import { ButtonComponent, DateTimePicker, InputComponent, RowComponent, SectionComponent, SpaceComponent, TextComponent } from '../components';
 import { useSelector } from 'react-redux';
 import { authSelector } from '../redux/reducers/authReducer';
+import { SelectModel } from '../models/SelectModel';
+import DropdownPicker from '../components/DropDownPicker';
 
 
 const initValues = {
@@ -28,9 +30,14 @@ const AddNewScreen = () => {
     ...initValues,
     authorId: auth.id,
   });
+  const [usersSelects, setUsersSelects] = useState<SelectModel[]>([]);
+
+  useEffect(() => {
+    handleGetAllUsers();
+  }, []);
 
   const handleChangeValue = (key: string, value: string) => {
-    const items = {...eventData};
+    const items = { ...eventData };
     items[`${key}`] = value;
 
     setEventData(items);
@@ -38,6 +45,31 @@ const AddNewScreen = () => {
 
   const handleAddEvent = async () => {
     console.log(eventData);
+  };
+
+  const handleGetAllUsers = async () => {
+    const api = `/get-all`;
+
+    try {
+      const res: any = await userAPI.HandleUser(api);
+
+      if (res && res.data) {
+        const items: SelectModel[] = [];
+
+        res.data.forEach(
+          (item: any) =>
+            item.email &&
+            items.push({
+              label: item.email,
+              value: item.id,
+            }),
+        );
+
+        setUsersSelects(items);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -83,6 +115,16 @@ const AddNewScreen = () => {
           selected={eventData.date}
         />
 
+        <DropdownPicker
+          label="Invited users"
+          values={usersSelects}
+          onSelect={(val: string | string[]) =>
+            handleChangeValue('users', val as string[])
+          }
+          selected={eventData.users}
+          multiple
+        />
+
         <InputComponent
           placeHolder="Title Address"
           multiline
@@ -90,7 +132,7 @@ const AddNewScreen = () => {
           allowClear
           value={eventData.location.title}
           onChange={val =>
-            handleChangeValue('location', {...eventData.location, title: val})
+            handleChangeValue('location', { ...eventData.location, title: val })
           }
         />
       </SectionComponent>

@@ -1,6 +1,13 @@
 import axios from "axios";
 import queryString from 'query-string' //is a method from the query-string library. It converts an object into a URL query string.
 import { appInfo } from "../constants/appInfo";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const getAccessToken = async () => {
+    const res = await AsyncStorage.getItem('auth');
+
+    return res ? JSON.parse(res).accesstoken : '';
+  };
 
 const axiosClient = axios.create({
     baseURL: appInfo.BASE_URL, // Setting the base URL for all requests made by this axios instance.
@@ -8,17 +15,17 @@ const axiosClient = axios.create({
 });
 
 axiosClient.interceptors.request.use(async (config: any) => {
-    // Interceptor to modify the request configuration before the request is sent.
+    const accesstoken = await getAccessToken();
+
     config.headers = {
-        Authorization: '', // Setting the Authorization header (usually for tokens, though it's empty here).
-        Accept: 'application/json', // Setting the Accept header to expect JSON responses.
-        ...config.headers // Merging any other headers that may already be set in the config.
+      Authorization: accesstoken ? `Bearer ${accesstoken}` : '',
+      Accept: 'application/json',
+      ...config.headers,
     };
 
     config.data;
-
-    return config; // Returning the modified config.
-});
+    return config;
+  });
 
 axiosClient.interceptors.response.use(res => {
     // Interceptor to handle the response.
