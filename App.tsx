@@ -1,9 +1,11 @@
 import { StatusBar } from 'react-native'
-import React, {  } from 'react'
+import React, { } from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import store from './src/redux/store';
 import { Provider } from 'react-redux'
 import AppRouters from './src/navigators/AppRouters';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Host } from 'react-native-portalize';
 
 const App = () => {
 
@@ -27,15 +29,19 @@ const App = () => {
 
   return (
     <>
-      <Provider store={store}>
-        <StatusBar barStyle='dark-content'
-          backgroundColor='transparent'
-          translucent />
+      <GestureHandlerRootView style={{ flex: 1 }}>
 
-        <NavigationContainer>
-          <AppRouters />
-        </NavigationContainer>
-      </Provider>
+        <Provider store={store}>
+          <StatusBar barStyle='dark-content'
+            backgroundColor='transparent'
+            translucent />
+          <Host>
+            <NavigationContainer>
+              <AppRouters />
+            </NavigationContainer>
+          </Host>
+        </Provider>
+      </GestureHandlerRootView>
     </>
   )
 }

@@ -1,12 +1,19 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SelectModel } from "../models/SelectModel";
 import RowComponent from "./RowComponent";
 import TextComponent from "./TextComponent";
 import { appColors } from "../constants/appColors";
 import SpaceComponent from "./SpaceComponent";
-import { TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { fontFamily } from "../constants/fontFamily";
+import { ArrowDown2 } from "iconsax-react-native";
+import ButtonComponent from "./ButtonComponent";
+import InputComponent from "./InputComponent";
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Modalize} from 'react-native-modalize';
+import {Portal} from 'react-native-portalize';
+
 
 interface Props {
     label?: string;
@@ -20,12 +27,12 @@ interface Props {
     const {onSelect, selected, values, label, multiple} = props;
     const [searchKey, setSearchKey] = useState('');
     const [isVisibleModalize, setIsVisibleModalize] = useState(false);
-    const modalieRef = useRef<Modalize>();
+    const modalizeRef = useRef<Modalize>();
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
     useEffect(() => {
       if (isVisibleModalize) {
-        modalieRef.current?.open();
+        modalizeRef.current?.open();
       }
     }, [isVisibleModalize]);
 
@@ -84,7 +91,7 @@ interface Props {
               ? () => handleSelectItem(item.value)
               : () => {
                   onSelect(item.value);
-                  modalieRef.current?.close();
+                  modalizeRef.current?.close();
                 }
           }
           key={item.value}
@@ -141,7 +148,7 @@ interface Props {
         <Portal>
           <Modalize
             handlePosition="inside"
-            ref={modalieRef}
+            ref={modalizeRef}
             FooterComponent={
               multiple && (
                 <View style={{paddingHorizontal: 20, paddingBottom: 30}}>
@@ -150,7 +157,7 @@ interface Props {
                     type="primary"
                     onPress={() => {
                       onSelect(selectedItems);
-                      modalieRef.current?.close();
+                      modalizeRef.current?.close();
                     }}
                   />
                 </View>
@@ -178,7 +185,7 @@ interface Props {
                 <ButtonComponent
                   type="link"
                   text="Cancel"
-                  onPress={() => modalieRef.current?.close()}
+                  onPress={() => modalizeRef.current?.close()}
                 />
               </RowComponent>
             }
