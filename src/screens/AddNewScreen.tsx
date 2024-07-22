@@ -135,6 +135,13 @@ const AddNewScreen = () => {
             handleChangeValue('location', { ...eventData.location, title: val })
           }
         />
+        <InputComponent
+          placeHolder="Price"
+          allowClear
+          type="number-pad"
+          value={eventData.price}
+          onChange={val => handleChangeValue('price', val)}
+        />
       </SectionComponent>
       <SectionComponent>
         <ButtonComponent
