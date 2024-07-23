@@ -1,5 +1,6 @@
 import AvatarGroup from "./AvatarGroup";
 import ButtonComponent from "./ButtonComponent";
+import ButtonImagePicker from "./ButtonImagePicker";
 import CardComponent from "./CardComponent";
 import CategoryList from "./CategoryList";
 import CircleComponent from "./CircleComponent";
@@ -32,4 +33,5 @@ export {
     AvatarGroup,
     LocationChoice,
     DateTimePicker,
+    ButtonImagePicker,
 }
