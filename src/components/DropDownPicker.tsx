@@ -7,7 +7,7 @@ import SpaceComponent from "./SpaceComponent";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { fontFamily } from "../constants/fontFamily";
-import { ArrowDown2 } from "iconsax-react-native";
+import { ArrowDown2, SearchNormal1 } from "iconsax-react-native";
 import ButtonComponent from "./ButtonComponent";
 import InputComponent from "./InputComponent";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -174,11 +174,11 @@ interface Props {
                 <View style={{flex: 1}}>
                   <InputComponent
                     styles={{marginBottom: 0}}
-                    placeholder="Search..."
+                    placeHolder="Search..."
                     value={searchKey}
                     onChange={val => setSearchKey(val)}
                     allowClear
-                    affix={<SearchNormal1 size={22} color={appColors.text} />}
+                    suffix={<SearchNormal1 size={22} color={appColors.text} />}
                   />
                 </View>
                 <SpaceComponent width={20} />
