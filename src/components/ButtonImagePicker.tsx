@@ -1,5 +1,5 @@
 import { View, Text, Modal, TouchableOpacity } from 'react-native'
-import React, { useRef, useState } from 'react'
+import React, { ReactNode, useRef, useState } from 'react'
 import ButtonComponent from './ButtonComponent';
 import { Portal } from 'react-native-portalize';
 import { Modalize } from 'react-native-modalize';
@@ -9,6 +9,9 @@ import RowComponent from './RowComponent';
 import InputComponent from './InputComponent';
 import TextComponent from './TextComponent';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { Camera, Image, Link } from 'iconsax-react-native';
+import SpaceComponent from './SpaceComponent';
+import { fontFamily } from '../constants/fontFamily';
 
 const ButtonImagePicker = () => {
 
@@ -17,6 +20,55 @@ const ButtonImagePicker = () => {
     const [imageUrl, setImageUrl] = useState('');
     const [isVisibleModalAddUrl, setIsVisibleModalAddUrl] = useState(false);
 
+    const choiceImages = [
+        {
+          key: 'camera',
+          title: 'Take a picture',
+          icon: <Camera size={22} color={appColors.text} />,
+        },
+        {
+          key: 'library',
+          title: 'From library',
+          icon: <Image size={22} color={appColors.text} />,
+        },
+        {
+          key: 'url',
+          title: 'From url',
+          icon: <Link size={22} color={appColors.text} />,
+        },
+      ];
+
+      const renderItem = (item: {icon: ReactNode; key: string; title: string}) => (
+        <RowComponent
+          key={item.key}
+          styles={{marginBottom: 20}}
+          onPress={() => handleChoiceImage(item.key)}>
+          {item.icon}
+          <SpaceComponent width={12} />
+          <TextComponent text={item.title} flex={1} font={fontFamily.medium} />
+        </RowComponent>
+      );
+
+      const handleChoiceImage = (key: string) => {
+        switch (key) {
+          case 'library':
+            ImageCropPicker.openPicker(options).then(res => {
+              onSelect({type: 'file', value: res});
+            });
+            break;
+
+          case 'camera':
+            ImageCropPicker.openCamera(options).then(res => {
+              onSelect({type: 'file', value: res});
+            });
+            break;
+          default:
+            setIsVisibleModalAddUrl(true);
+            break;
+        }
+
+        modalizeRef.current?.close();
+      };
     return (
         <View style={{ marginBottom: 20 }}>
             <ButtonComponent
