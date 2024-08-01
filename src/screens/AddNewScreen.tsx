@@ -1,11 +1,12 @@
-import { View, Text } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import ContainerComponent from '../components/ContainerComponent';
-import { ButtonComponent, DateTimePicker, InputComponent, RowComponent, SectionComponent, SpaceComponent, TextComponent } from '../components';
+import { ButtonComponent, ButtonImagePicker, DateTimePicker, InputComponent, RowComponent, SectionComponent, SpaceComponent, TextComponent } from '../components';
 import { useSelector } from 'react-redux';
 import { authSelector } from '../redux/reducers/authReducer';
 import { SelectModel } from '../models/SelectModel';
 import DropdownPicker from '../components/DropDownPicker';
+import { ImageOrVideo } from 'react-native-image-crop-picker';
 
 
 const initValues = {
@@ -31,6 +32,8 @@ const AddNewScreen = () => {
     authorId: auth.id,
   });
   const [usersSelects, setUsersSelects] = useState<SelectModel[]>([]);
+  const [fileSelected, setFileSelected] = useState<any>();
+  const [errorsMess, setErrorsMess] = useState<string[]>([]);
 
   useEffect(() => {
     handleGetAllUsers();
@@ -72,12 +75,35 @@ const AddNewScreen = () => {
     }
   };
 
+  const handleFileSelected = (val: ImageOrVideo) => {
+    setFileSelected(val);
+    handleChangeValue('photoUrl', val.path);
+  };
+
   return (
     <ContainerComponent isScroll>
       <SectionComponent>
         <TextComponent text="Add new" title />
       </SectionComponent>
       <SectionComponent>
+      {eventData.photoUrl || fileSelected ? (
+          <Image
+            source={{
+              uri: eventData.photoUrl ? eventData.photoUrl : fileSelected.uri,
+            }}
+            style={{width: '100%', height: 250, marginBottom: 12}}
+            resizeMode="cover"
+          />
+        ) : (
+          <></>
+        )}
+        <ButtonImagePicker
+          onSelect={(val: any) =>
+            val.type === 'url'
+              ? handleChangeValue('photoUrl', val.value as string)
+              : handleFileSelected(val.value)
+          }
+        />
         <InputComponent
           placeHolder="Title"
           value={eventData.title}

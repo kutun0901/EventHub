@@ -12,8 +12,8 @@ const MainNavigator = () => {
             <Stack.Navigator screenOptions={{
                 headerShown: false
             }}>
-                <Stack.Screen name='EventDetail' component={EventDetail}/>
                 <Stack.Screen name='Main' component={DrawerNavigation} />
+                <Stack.Screen name='EventDetail' component={EventDetail}/>
 
             </Stack.Navigator>
 
