@@ -12,8 +12,15 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import { Camera, Image, Link } from 'iconsax-react-native';
 import SpaceComponent from './SpaceComponent';
 import { fontFamily } from '../constants/fontFamily';
+import ImageCropPicker from 'react-native-image-crop-picker';
 
-const ButtonImagePicker = () => {
+interface Props {
+    onSelect: (val: {type: 'url' | 'file'; value: string | ImageOrVideo}) => void;
+  }
+
+const ButtonImagePicker = (props: Props) => {
+
+    const {onSelect} = props;
 
     const modalizeRef = useRef<Modalize>();
 
