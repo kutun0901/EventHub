@@ -7,6 +7,7 @@ import { authSelector } from '../redux/reducers/authReducer';
 import { SelectModel } from '../models/SelectModel';
 import DropdownPicker from '../components/DropDownPicker';
 import { ImageOrVideo } from 'react-native-image-crop-picker';
+import { Validate } from '../utils/validate';
 
 
 const initValues = {
@@ -38,6 +39,12 @@ const AddNewScreen = () => {
   useEffect(() => {
     handleGetAllUsers();
   }, []);
+
+  useEffect(() => {
+    const mess = Validate.EventValidation(eventData);
+
+    setErrorsMess(mess);
+  }, [eventData]);
 
   const handleChangeValue = (key: string, value: string) => {
     const items = { ...eventData };
@@ -86,12 +93,12 @@ const AddNewScreen = () => {
         <TextComponent text="Add new" title />
       </SectionComponent>
       <SectionComponent>
-      {eventData.photoUrl || fileSelected ? (
+        {eventData.photoUrl || fileSelected ? (
           <Image
             source={{
               uri: eventData.photoUrl ? eventData.photoUrl : fileSelected.uri,
             }}
-            style={{width: '100%', height: 250, marginBottom: 12}}
+            style={{ width: '100%', height: 250, marginBottom: 12 }}
             resizeMode="cover"
           />
         ) : (
@@ -193,6 +200,7 @@ const AddNewScreen = () => {
       </SectionComponent>
       <SectionComponent>
         <ButtonComponent
+          disable={errorsMess.length > 0}
           text="Add New"
           onPress={handleAddEvent}
           type="primary"
