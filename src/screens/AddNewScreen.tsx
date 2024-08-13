@@ -8,6 +8,10 @@ import { SelectModel } from '../models/SelectModel';
 import DropdownPicker from '../components/DropDownPicker';
 import { ImageOrVideo } from 'react-native-image-crop-picker';
 import { Validate } from '../utils/validate';
+import { appColors } from '../constants/appColors';
+import userAPI from '../apis/userApi';
+import storage from '@react-native-firebase/storage';
+import { EventModel } from '../models/EventModels';
 
 
 const initValues = {
@@ -25,7 +29,7 @@ const initValues = {
   date: Date.now(),
 };
 
-const AddNewScreen = () => {
+const AddNewScreen = ({navigation}: any) => {
   const auth = useSelector(authSelector);
 
   const [eventData, setEventData] = useState<any>({
@@ -54,8 +58,50 @@ const AddNewScreen = () => {
   };
 
   const handleAddEvent = async () => {
-    console.log(eventData);
+    if (fileSelected) {
+      const filename = `${fileSelected.filename ?? `image-${Date.now()}`}.${
+        fileSelected.path.split('.')[1]
+      }`;
+      const path = `images/${filename}`;
+
+      const res = storage().ref(path).putFile(fileSelected.path);
+
+      res.on(
+        'state_changed',
+        snap => {
+          console.log(snap.bytesTransferred);
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+          storage()
+            .ref(path)
+            .getDownloadURL()
+            .then(url => {
+              eventData.photoUrl = url;
+
+              handlePushEvent(eventData);
+            });
+        },
+      );
+    } else {
+      handlePushEvent(eventData);
+    }
   };
+
+  const handlePushEvent = async (event: EventModel) => {
+    const api = `/add-new`;
+    try {
+      const res = await eventAPI.HandleEvent(api, event, 'post');
+      navigation.navigate('Explore', {
+        screen: 'HomeScreen',
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   const handleGetAllUsers = async () => {
     const api = `/get-all`;
@@ -198,6 +244,18 @@ const AddNewScreen = () => {
           onChange={val => handleChangeValue('price', val)}
         />
       </SectionComponent>
+      {errorsMess.length > 0 && (
+        <SectionComponent>
+          {errorsMess.map(mess => (
+            <TextComponent
+              text={mess}
+              key={mess}
+              color={appColors.danger}
+              styles={{ marginBottom: 12 }}
+            />
+          ))}
+        </SectionComponent>
+      )}
       <SectionComponent>
         <ButtonComponent
           disable={errorsMess.length > 0}
