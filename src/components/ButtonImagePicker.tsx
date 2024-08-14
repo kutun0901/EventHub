@@ -138,6 +138,7 @@ const ButtonImagePicker = (props: Props) => {
                                 type="link"
                                 text="Agree"
                                 onPress={() => {
+                                  setImageUrl('')
                                     setIsVisibleModalAddUrl(false);
                                     onSelect({ type: 'url', value: imageUrl });
                                     setImageUrl('');
