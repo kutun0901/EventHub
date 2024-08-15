@@ -82,6 +82,32 @@ const LocationModal = (props: Props) => {
     }
   };
 
+  const handleGetAddressFromPosition = ({
+    latitude,
+    longitude,
+  }: {
+    latitude: number;
+    longitude: number;
+  }) => {
+    onSelect({
+      address: 'This is demo address',
+      position: {
+        lat: latitude,
+        long: longitude,
+      },
+    });
+    onClose();
+    GeoCoder.from(latitude, longitude)
+      .then(data => {
+        console.log(data);
+        console.log(data.results[0].address_components[0]);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+
   return (
     <Modal animationType="slide" visible={visible} style={{ flex: 1 }}>
       <View style={{ paddingVertical: 42 }}>
