@@ -1,16 +1,17 @@
 import GeoLocation from '@react-native-community/geolocation';
-import {ArrowLeft2} from 'iconsax-react-native';
-import React, {useEffect, useState} from 'react';
-import {FlatList, StatusBar, TouchableOpacity, View} from 'react-native';
-import MapView, {Marker} from 'react-native-maps';
+import { ArrowLeft2 } from 'iconsax-react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, StatusBar, TouchableOpacity, View } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { EventModel } from '../../models/EventModels';
-import { CardComponent, EventItem, InputComponent, RowComponent, SpaceComponent } from '../../components';
+import { CardComponent, CategoryList, EventItem, InputComponent, RowComponent, SpaceComponent } from '../../components';
 import { appColors } from '../../constants/appColors';
 import { globalStyles } from '../../styles/globalStyles';
 import { appInfo } from '../../constants/appInfo';
+import eventAPI from '../../apis/eventApi';
 
-const MapScreen = ({navigation}: any) => {
+const MapScreen = ({ navigation }: any) => {
   const [currentLocation, setCurrentLocation] = useState<{
     lat: number;
     long: number;
@@ -34,9 +35,25 @@ const MapScreen = ({navigation}: any) => {
     );
   }, []);
 
+  useEffect(() => {
+    currentLocation && getNearbyEvents();
+  }, [currentLocation]);
+
+  const getNearbyEvents = async () => {
+    const api = `/get-events?lat=${currentLocation?.lat}&long=${currentLocation?.long
+      }&distance=${5}`;
+
+    try {
+      const res = await eventAPI.HandleEvent(api);
+
+      setEvents(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <StatusBar barStyle={'dark-content'} />
 
       {currentLocation ? (
@@ -90,9 +107,9 @@ const MapScreen = ({navigation}: any) => {
           paddingTop: 48,
         }}>
         <RowComponent>
-          <View style={{flex: 1}}>
+          <View style={{ flex: 1 }}>
             <InputComponent
-              styles={{marginBottom: 0}}
+              styles={{ marginBottom: 0 }}
               prefix={
                 <TouchableOpacity
                   onPress={() =>
@@ -103,7 +120,7 @@ const MapScreen = ({navigation}: any) => {
                   <ArrowLeft2 size={24} color={appColors.text} />
                 </TouchableOpacity>
               }
-              placeholder="Search"
+              placeHolder="Search"
               value=""
               onChange={val => console.log(val)}
             />
@@ -111,7 +128,7 @@ const MapScreen = ({navigation}: any) => {
           <SpaceComponent width={12} />
           <CardComponent
             onPress={getNearbyEvents}
-            styles={[globalStyles.noSpaceCard, {width: 56, height: 56}]}
+            styles={[globalStyles.noSpaceCard, { width: 56, height: 56 }]}
             color={appColors.white}>
             <MaterialIcons
               name="my-location"
@@ -121,7 +138,7 @@ const MapScreen = ({navigation}: any) => {
           </CardComponent>
         </RowComponent>
         <SpaceComponent height={20} />
-        <CategoriesList />
+        <CategoryList />
       </View>
       <View
         style={{
@@ -133,7 +150,7 @@ const MapScreen = ({navigation}: any) => {
         <FlatList
           initialScrollIndex={0}
           data={events}
-          renderItem={({item}) => <EventItem item={item} type="list" />}
+          renderItem={({ item }) => <EventItem item={item} type="list" />}
           horizontal
           showsHorizontalScrollIndicator={false}
         />

@@ -80,6 +80,7 @@ const CategoryList = (props: Props) => {
                     onPress={() => { }}
                     icon={item.icon}
                     label={item.label}
+                    textColor={isFill ? appColors.white : appColors.text2}
                 />
             )}
         />
