@@ -35,7 +35,7 @@ const EventItem = (props: Props) => {
         <>
           <ImageBackground
             style={{flex: 1, marginBottom: 12, height: 131, padding: 10}}
-            source={require('../assets/images/event-image.png')}
+            source={uri: item.photoUrl}
             imageStyle={{
               resizeMode: 'cover',
               borderRadius: 12,
