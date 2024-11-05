@@ -13,6 +13,8 @@ import { globalStyles } from '../../styles/globalStyles';
 import GeoLocation from '@react-native-community/geolocation';
 import axios from 'axios';
 import { AddressModel } from '../../models/AddressModel';
+import eventAPI from '../../apis/eventApi';
+import { EventModel } from '../../models/EventModels';
 
 const HomeScreen = ({ navigation }: any) => {
   const dispatch = useDispatch();
@@ -20,9 +22,12 @@ const HomeScreen = ({ navigation }: any) => {
   const auth = useSelector(authSelector);
 
   const [addressInfo, setAddressInfo] = useState<AddressModel>();
+  const [events, setEvents] = useState<EventModel[]>([])
 
   useEffect(() => {
     handleGetCurrentLocation();
+
+    getEvents();
   }, []);
 
   const handleGetCurrentLocation = async () => {
@@ -57,6 +62,18 @@ const HomeScreen = ({ navigation }: any) => {
         console.log('Error in getAddressFromCoordinates', e);
       });
   };
+
+  const getEvents = async () => {
+    const api = `/get-events?limit=5`;
+
+    try {
+      const res = await eventAPI.HandleEvent(api)
+
+      res && res.data && setEvents(res.data)
+    } catch (error) {
+      console.log(`Get event in homescreen line 67 ${error}`)
+    }
+  }
 
   const itemEvent = {
     title: 'International Band Music Concert',
@@ -235,9 +252,9 @@ const HomeScreen = ({ navigation }: any) => {
           <FlatList
             showsHorizontalScrollIndicator={false}
             horizontal
-            data={Array.from({length: 5})}
+            data={events}
             renderItem={({item, index}) => (
-              <EventItem key={`event${index}`} item={itemEvent} type="card" />
+              <EventItem key={`event${index}`} item={item} type="card" />
             )}
           />
         </SectionComponent>
