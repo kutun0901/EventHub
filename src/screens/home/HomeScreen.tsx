@@ -13,66 +13,100 @@ import { globalStyles } from '../../styles/globalStyles';
 import GeoLocation from '@react-native-community/geolocation';
 import axios from 'axios';
 import { AddressModel } from '../../models/AddressModel';
+import eventAPI from '../../apis/eventApi';
+import { EventModel } from '../../models/EventModels';
 
 const HomeScreen = ({ navigation }: any) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const auth = useSelector(authSelector);
+  // const auth = useSelector(authSelector);
 
-  const [addressInfo, setAddressInfo] = useState<AddressModel>();
+  const [currentLocation, setCurrentLocation] = useState<AddressModel>();
+  const [events, setEvents] = useState<EventModel[]>([])
+  const [nearbyEvents, setNearbyEvents] = useState<EventModel[]>([]);
 
   useEffect(() => {
-    handleGetCurrentLocation();
-  }, []);
-
-  const handleGetCurrentLocation = async () => {
     GeoLocation.getCurrentPosition(position => {
-      if (position && position.coords) {
-        handleRevertGeocode({
+      if (position.coords) {
+        reverseGeoCode({
           lat: position.coords.latitude,
           long: position.coords.longitude,
         });
       }
     });
+
+    getEvents();
+  }, []);
+
+  useEffect(() => {
+    currentLocation &&
+      currentLocation.position &&
+      getEvents(currentLocation.position.lat, currentLocation.position.lng);
+  }, [currentLocation]);
+
+  // const handleGetCurrentLocation = async () => {
+  //   GeoLocation.getCurrentPosition(position => {
+  //     if (position && position.coords) {
+  //       handleRevertGeocode({
+  //         lat: position.coords.latitude,
+  //         long: position.coords.longitude,
+  //       });
+  //     }
+  //   });
+  // };
+
+  const reverseGeoCode = async ({lat, long}: {lat: number; long: number}) => {
+    const api = `https://revgeocode.search.hereapi.com/v1/revgeocode?at=${lat},${long}&lang=vi-VI&apiKey=zCDIlA5ytRuEe3YS9YrJlzAGjTkxsy4S6mJtq7ZpkGU`;
+
+    try {
+      const res = await axios(api);
+
+      if (res && res.status === 200 && res.data) {
+        const items = res.data.items;
+        setCurrentLocation(items[0]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleRevertGeocode = async ({
-    lat,
-    long,
-  }: {
-    lat: number;
-    long: number;
-  }) => {
-    const api = `https://revgeocode.search.hereapi.com/v1/revgeocode?at=${lat},${long}&lang=en-US&apiKey=${process.env.HERE_API_KEY}`;
-    await axios
-      .get(api)
-      .then(res => {
-        if (res && res.status === 200 && res.data) {
-          const items = res.data.items;
+  const getEvents = async (lat?: number, long?: number) => {
+    const api =
+      lat && long
+        ? `/get-events?lat=${lat}&long=${long}&distance=${5}`
+        : '/get-events';
 
-          items.length > 0 && setAddressInfo(items[0]);
-        }
-      })
-      .catch(e => {
-        console.log('Error in getAddressFromCoordinates', e);
-      });
+    try {
+      const res = await eventAPI.HandleEvent(api);
+
+      if (res && res.data) {
+        lat && long
+          ? setNearbyEvents(res.data)
+          : setEvents(
+              res.data.sort((a: any, b: any) => a.createdAt - b.createdAt),
+            );
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const itemEvent = {
-    title: 'International Band Music Concert',
-    description:
-      'Enjoy your favorite dishe and a lovely your friends and family and have a great time. Food from local food trucks will be available for purchase.',
-    location: {
-      title: 'Gala Convention Center',
-      address: '36 Guild Street London, UK',
-    },
-    imageUrl: '',
-    users: [''],
-    authorId: '',
-    startAt: Date.now(),
-    endAt: Date.now(),
-    date: Date.now(),
-  };
+
+  // const itemEvent = {
+  //   title: 'International Band Music Concert',
+  //   description:
+  //     'Enjoy your favorite dishe and a lovely your friends and family and have a great time. Food from local food trucks will be available for purchase.',
+  //   location: {
+  //     title: 'Gala Convention Center',
+  //     address: '36 Guild Street London, UK',
+  //   },
+  //   imageUrl: '',
+  //   users: [''],
+  //   authorId: '',
+  //   startAt: Date.now(),
+  //   endAt: Date.now(),
+  //   date: Date.now(),
+  // };
 
   return (
     <View style={[globalStyles.container]}>
@@ -194,9 +228,9 @@ const HomeScreen = ({ navigation }: any) => {
           <FlatList
             showsHorizontalScrollIndicator={false}
             horizontal
-            data={Array.from({ length: 5 })}
+            data={events}
             renderItem={({ item, index }) => (
-              <EventItem key={`event${index}`} item={itemEvent} type="card" />
+              <EventItem key={`event${index}`} item={item} type="card" />
             )}
           />
         </SectionComponent>
@@ -235,9 +269,9 @@ const HomeScreen = ({ navigation }: any) => {
           <FlatList
             showsHorizontalScrollIndicator={false}
             horizontal
-            data={Array.from({length: 5})}
+            data={nearbyEvents}
             renderItem={({item, index}) => (
-              <EventItem key={`event${index}`} item={itemEvent} type="card" />
+              <EventItem key={`event${index}`} item={item} type="card" />
             )}
           />
         </SectionComponent>
