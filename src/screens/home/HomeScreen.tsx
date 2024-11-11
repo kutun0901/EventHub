@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { authSelector, removeAuth } from '../../redux/reducers/authReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { GoogleSignin } from '@react-native-google-signin/google-signin'
-import { CategoryList, CircleComponent, EventItem, RowComponent, SectionComponent, SpaceComponent, TabBarComponent, TagComponent, TextComponent } from '../../components';
+import { CategoryList, CircleComponent, EventItem, LoadingComponent, RowComponent, SectionComponent, SpaceComponent, TabBarComponent, TagComponent, TextComponent } from '../../components';
 import { HambergerMenu, Notification, SearchNormal1, Sort } from 'iconsax-react-native';
 import { appColors } from '../../constants/appColors';
 import { fontFamily } from '../../constants/fontFamily';
@@ -24,6 +24,8 @@ const HomeScreen = ({ navigation }: any) => {
   const [currentLocation, setCurrentLocation] = useState<AddressModel>();
   const [events, setEvents] = useState<EventModel[]>([])
   const [nearbyEvents, setNearbyEvents] = useState<EventModel[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   useEffect(() => {
     GeoLocation.getCurrentPosition(position => {
@@ -76,9 +78,11 @@ const HomeScreen = ({ navigation }: any) => {
         ? `/get-events?lat=${lat}&long=${long}&distance=${5}`
         : '/get-events';
 
+    setIsLoading(true)
     try {
       const res = await eventAPI.HandleEvent(api);
 
+      setIsLoading(false)
       if (res && res.data) {
         lat && long
           ? setNearbyEvents(res.data)
@@ -87,6 +91,8 @@ const HomeScreen = ({ navigation }: any) => {
             );
       }
     } catch (error) {
+      setIsLoading(false)
+
       console.log(error);
     }
   };
@@ -225,14 +231,18 @@ const HomeScreen = ({ navigation }: any) => {
         ]}>
         <SectionComponent styles={{ paddingHorizontal: 0, paddingTop: 20 }}>
           <TabBarComponent title="Upcoming Events" onPress={() => { }} />
-          <FlatList
-            showsHorizontalScrollIndicator={false}
-            horizontal
-            data={events}
-            renderItem={({ item, index }) => (
-              <EventItem key={`event${index}`} item={item} type="card" />
-            )}
-          />
+          {events.length > 0 ? (
+            <FlatList
+              showsHorizontalScrollIndicator={false}
+              horizontal
+              data={events}
+              renderItem={({item, index}) => (
+                <EventItem key={`event${index}`} item={item} type="card" />
+              )}
+            />
+          ) : (
+            <LoadingComponent isLoading={isLoading} values={events.length} />
+          )}
         </SectionComponent>
         <SectionComponent>
           <ImageBackground
@@ -265,15 +275,30 @@ const HomeScreen = ({ navigation }: any) => {
           </ImageBackground>
         </SectionComponent>
         <SectionComponent styles={{paddingHorizontal: 0, paddingTop: 24}}>
-          <TabBarComponent title="Upcoming Events" onPress={() => {}} />
-          <FlatList
-            showsHorizontalScrollIndicator={false}
-            horizontal
-            data={nearbyEvents}
-            renderItem={({item, index}) => (
-              <EventItem key={`event${index}`} item={item} type="card" />
-            )}
+        <TabBarComponent
+            title="Nearby You"
+            onPress={() =>
+              navigation.navigate('ExploreEvents', {
+                key: 'nearby',
+                title: 'Nearby You',
+              })
+            }
           />
+          {nearbyEvents.length > 0 ? (
+            <FlatList
+              showsHorizontalScrollIndicator={false}
+              horizontal
+              data={nearbyEvents}
+              renderItem={({item, index}) => (
+                <EventItem key={`event${index}`} item={item} type="card" />
+              )}
+            />
+          ) : (
+            <LoadingComponent
+              isLoading={isLoading}
+              values={nearbyEvents.length}
+            />
+          )}
         </SectionComponent>
       </ScrollView>
     </View>

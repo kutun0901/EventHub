@@ -8,6 +8,7 @@ import DateTimePicker from "./DateTimePicker";
 import DrawerCustom from "./DrawerCustom";
 import EventItem from "./EventItem";
 import InputComponent from "./InputComponent";
+import LoadingComponent from "./LoadingComponent";
 import LocationChoice from "./LocationChoice";
 import RowComponent from "./RowComponent";
 import SectionComponent from "./SectionComponent";
@@ -34,4 +35,5 @@ export {
     LocationChoice,
     DateTimePicker,
     ButtonImagePicker,
+    LoadingComponent,
 }
