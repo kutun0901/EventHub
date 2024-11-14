@@ -1,5 +1,5 @@
 import { View, Text, ImageBackground, ScrollView, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {LinearGradient} from 'react-native-linear-gradient';
 import { AvatarGroup, ButtonComponent, CardComponent, RowComponent, SectionComponent, SpaceComponent, TabBarComponent, TextComponent } from '../../components';
 import { appColors } from '../../constants/appColors';
@@ -8,14 +8,43 @@ import { globalStyles } from '../../styles/globalStyles';
 import { fontFamily } from '../../constants/fontFamily';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { EventModel } from '../../models/EventModels';
+import { useSelector } from 'react-redux';
+import { authSelector } from '../../redux/reducers/authReducer';
 
 const EventDetail = ({navigation, route} : any) => {
   const {item}: {item: EventModel} = route.params;
+  const [isLoading, setIsLoading] = useState(false);
+  const [followers, setFollowers] = useState<string[]>([]);
+
+  const auth = useSelector(authSelector);
+
+  useEffect(() => {
+    if (item) {
+      setFollowers(item.followers);
+    }
+  }, [item]);
+
+  const handleFlower = () => {
+    const items = [...followers];
+
+    if (items.includes(auth.id)) {
+      const index = items.findIndex(element => element === auth.id);
+
+      if (index !== -1) {
+        items.splice(index, 1);
+      }
+    } else {
+      items.push(auth.id);
+    }
+
+    setFollowers(items);
+
+  };
 
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <ImageBackground
-        source={require('../../assets/images/event-image.png')}
+        source={{uri: item.photoUrl}}
         style={{flex: 1, height: 244}}
         imageStyle={{
           resizeMode: 'cover',
@@ -48,7 +77,9 @@ const EventDetail = ({navigation, route} : any) => {
                 color="#ffffff4D">
                 <MaterialIcons
                   name="bookmark"
-                  color={appColors.white}
+                  color={followers.includes(auth.id) ?
+                    appColors.danger2 :
+                    appColors.white}
                   size={22}
                 />
               </CardComponent>
@@ -80,7 +111,7 @@ const EventDetail = ({navigation, route} : any) => {
                     width: '90%',
                   },
                 ]}>
-                <AvatarGroup size={36} />
+                <AvatarGroup userIds={item.users} size={36} />
                 <TouchableOpacity
                   style={[
                     globalStyles.button,
@@ -150,12 +181,12 @@ const EventDetail = ({navigation, route} : any) => {
                     justifyContent: 'space-around',
                   }}>
                   <TextComponent
-                    text={item.location.title}
+                    text={item.locationTitle}
                     font={fontFamily.medium}
                     size={16}
                   />
                   <TextComponent
-                    text={item.location.address}
+                    text={item.locationAddress}
                     color={appColors.gray}
                   />
                 </View>
