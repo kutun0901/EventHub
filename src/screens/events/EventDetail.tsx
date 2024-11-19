@@ -1,6 +1,6 @@
 import { View, Text, ImageBackground, ScrollView, Image, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import {LinearGradient} from 'react-native-linear-gradient';
+import { LinearGradient } from 'react-native-linear-gradient';
 import { AvatarGroup, ButtonComponent, CardComponent, RowComponent, SectionComponent, SpaceComponent, TabBarComponent, TextComponent } from '../../components';
 import { appColors } from '../../constants/appColors';
 import { ArrowLeft, ArrowRight, Calendar, Location } from 'iconsax-react-native';
@@ -10,19 +10,30 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { EventModel } from '../../models/EventModels';
 import { useSelector } from 'react-redux';
 import { authSelector } from '../../redux/reducers/authReducer';
+import eventAPI from '../../apis/eventApi';
+import { LoadingModal } from '../../modals';
 
-const EventDetail = ({navigation, route} : any) => {
-  const {item}: {item: EventModel} = route.params;
+const EventDetail = ({ navigation, route }: any) => {
+  const { item }: { item: EventModel } = route.params;
   const [isLoading, setIsLoading] = useState(false);
   const [followers, setFollowers] = useState<string[]>([]);
 
   const auth = useSelector(authSelector);
 
   useEffect(() => {
-    if (item) {
-      setFollowers(item.followers);
-    }
+    item && getFollowersById()
   }, [item]);
+
+  const getFollowersById = async () => {
+    const api = `/followers?id=${item._id}`;
+
+    try {
+      const res = await eventAPI.HandleEvent(api);
+      res && res.data && setFollowers(res.data);
+    } catch (error) {
+      console.log(`Can not get followers by event id ${error}`);
+    }
+  };
 
   const handleFlower = () => {
     const items = [...followers];
@@ -39,13 +50,34 @@ const EventDetail = ({navigation, route} : any) => {
 
     setFollowers(items);
 
+    handleUpdateFollowers(items)
   };
 
+  const handleUpdateFollowers = async (data: string[]) => {
+    // await UserHandle.getFollowersById(auth.id, dispatch);
+
+    const api = `/update-followers`;
+
+    try {
+      await eventAPI.HandleEvent(
+        api,
+        {
+          id,
+          followers: data,
+        },
+        'post',
+      );
+    } catch (error) {
+      console.log(`Can not update followers in Event detail line 63, ${error}`);
+    }
+  };
+
+
   return (
-    <View style={{flex: 1, backgroundColor: '#fff'}}>
+    <View style={{ flex: 1, backgroundColor: '#fff' }}>
       <ImageBackground
-        source={{uri: item.photoUrl}}
-        style={{flex: 1, height: 244}}
+        source={{ uri: item.photoUrl }}
+        style={{ flex: 1, height: 244 }}
         imageStyle={{
           resizeMode: 'cover',
         }}>
@@ -56,7 +88,7 @@ const EventDetail = ({navigation, route} : any) => {
               alignItems: 'flex-end',
               paddingTop: 42,
             }}>
-            <RowComponent styles={{flex: 1}}>
+            <RowComponent styles={{ flex: 1 }}>
               <TouchableOpacity
                 onPress={() => navigation.goBack()}
                 style={{
@@ -73,8 +105,9 @@ const EventDetail = ({navigation, route} : any) => {
                 color={appColors.white}
               />
               <CardComponent
-                styles={[globalStyles.noSpaceCard, {width: 36, height: 36}]}
-                color="#ffffff4D">
+                onPress={handleFlower}
+                styles={[globalStyles.noSpaceCard, { width: 36, height: 36 }]}
+                color={followers.includes(auth.id) ? "#ffffffB3" : "#ffffff4D"}>
                 <MaterialIcons
                   name="bookmark"
                   color={followers.includes(auth.id) ?
@@ -115,7 +148,7 @@ const EventDetail = ({navigation, route} : any) => {
                 <TouchableOpacity
                   style={[
                     globalStyles.button,
-                    {backgroundColor: appColors.primary, paddingVertical: 8},
+                    { backgroundColor: appColors.primary, paddingVertical: 8 },
                   ]}>
                   <TextComponent text="Invite" color={appColors.white} />
                 </TouchableOpacity>
@@ -135,9 +168,9 @@ const EventDetail = ({navigation, route} : any) => {
               />
             </SectionComponent>
             <SectionComponent>
-              <RowComponent styles={{marginBottom: 20}}>
+              <RowComponent styles={{ marginBottom: 20 }}>
                 <CardComponent
-                  styles={[globalStyles.noSpaceCard, {width: 48, height: 48}]}
+                  styles={[globalStyles.noSpaceCard, { width: 48, height: 48 }]}
                   color={`${appColors.primary}4D`}>
                   <Calendar
                     variant="Bold"
@@ -163,9 +196,9 @@ const EventDetail = ({navigation, route} : any) => {
                   />
                 </View>
               </RowComponent>
-              <RowComponent styles={{marginBottom: 20}}>
+              <RowComponent styles={{ marginBottom: 20 }}>
                 <CardComponent
-                  styles={[globalStyles.noSpaceCard, {width: 48, height: 48}]}
+                  styles={[globalStyles.noSpaceCard, { width: 48, height: 48 }]}
                   color={`${appColors.primary}4D`}>
                   <Location
                     variant="Bold"
@@ -191,7 +224,7 @@ const EventDetail = ({navigation, route} : any) => {
                   />
                 </View>
               </RowComponent>
-              <RowComponent styles={{marginBottom: 20}}>
+              <RowComponent styles={{ marginBottom: 20 }}>
                 <Image
                   source={{
                     uri: 'https://gamek.mediacdn.vn/133514250583805952/2022/5/18/photo-1-16528608926331302726659.jpg',
@@ -244,7 +277,7 @@ const EventDetail = ({navigation, route} : any) => {
         <ButtonComponent
           text="BUY TICKET $120"
           type="primary"
-          onPress={() => {}}
+          onPress={() => { }}
           iconFlex="right"
           icon={
             <View
@@ -259,6 +292,7 @@ const EventDetail = ({navigation, route} : any) => {
           }
         />
       </LinearGradient>
+      <LoadingModal visible={isLoading} />
     </View>
   );
 }
