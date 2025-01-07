@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react'
 import MainNavigator from './MainNavigator'
 import AuthNavigator from './AuthNavigator'
 import { useAsyncStorage } from '@react-native-async-storage/async-storage'
-import { addAuth, authSelector } from '../redux/reducers/authReducer'
+import { addAuth, authSelector, AuthState } from '../redux/reducers/authReducer'
 import {useSelector, useDispatch} from 'react-redux'
 import { SplashScreen } from '../screens'
+import userAPI from '../apis/userApi'
 
 const AppRouters = () => {
 
@@ -14,18 +15,27 @@ const AppRouters = () => {
     // Setup how long to display Splash screen
     const [isShowSplash, setIsShowPlash] = useState(true);
 
-    const auth = useSelector(authSelector)
+    const auth: AuthState = useSelector(authSelector)
 
   // Setup how long to display Splash screen
   useEffect(() => {
-    checkLogin();
+    handleGetData()
+    // checkLogin();
 
-    const timeOut = setTimeout(() => {
-      setIsShowPlash(false)
-    }, 1500);
+    // const timeOut = setTimeout(() => {
+    //   setIsShowPlash(false)
+    // }, 1500);
 
-    return () => clearTimeout(timeOut)
+    // return () => clearTimeout(timeOut)
   }, [])
+
+  const handleGetData = async () => {
+    await checkLogin()
+    await getFollowersById()
+
+    setIsShowPlash(false)
+  }
+
 
 
     const checkLogin = async () => {
@@ -34,6 +44,16 @@ const AppRouters = () => {
         console.log(res)
 
         res && dispatch(addAuth(JSON.parse(res)))
+    }
+
+    const getFollowersById = async () => {
+      const api = `/get-followed-events?uid=${auth.id}`
+
+      try {
+        const res  = await userAPI.HandleUser(api)
+      } catch (error) {
+        console.log(error)
+      }
     }
 
   return (
