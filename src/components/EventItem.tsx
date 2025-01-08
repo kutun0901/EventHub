@@ -62,7 +62,7 @@ const EventItem = (props: Props) => {
                   ].substring(0, 3)}
                 />
               </CardComponent>
-              {auth.follow_events && auth.follow_events.includes(item._id) && (
+              { auth.follow_events && auth.follow_events.includes(item._id) &&
                 <CardComponent
                   styles={[globalStyles.noSpaceCard]}
                   color="#ffffffB3">
@@ -72,7 +72,7 @@ const EventItem = (props: Props) => {
                     size={22}
                   />
                 </CardComponent>
-              )}
+              }
             </RowComponent>
           </ImageBackground>
           <TextComponent numOfLine={1} text={item.title} title size={18} />

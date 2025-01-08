@@ -1,15 +1,17 @@
 import {createSlice} from '@reduxjs/toolkit'
 
-interface AuthState {
+export interface AuthState {
     id: string,
     email: string,
-    accessToken: string
+    accessToken: string,
+    follow_events: string[],
 }
 
 const initialState: AuthState = {
     id: '',
     email: '',
     accessToken: '',
+    follow_events: []
 }
 
 const authSlice = createSlice({
