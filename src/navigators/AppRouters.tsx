@@ -3,10 +3,11 @@ import React, { useEffect, useState } from 'react'
 import MainNavigator from './MainNavigator'
 import AuthNavigator from './AuthNavigator'
 import { useAsyncStorage } from '@react-native-async-storage/async-storage'
-import { addAuth, authSelector, AuthState } from '../redux/reducers/authReducer'
+import { addAuth, addFollowedEvent, authSelector, AuthState } from '../redux/reducers/authReducer'
 import {useSelector, useDispatch} from 'react-redux'
 import { SplashScreen } from '../screens'
 import userAPI from '../apis/userApi'
+import { UserHandle } from '../utils/userHandlers'
 
 const AppRouters = () => {
 
@@ -29,9 +30,13 @@ const AppRouters = () => {
     // return () => clearTimeout(timeOut)
   }, [])
 
+  useEffect(() => {
+    UserHandle.getFollowersById(auth.id, dispatch)
+  }, [auth.id])
+
   const handleGetData = async () => {
     await checkLogin()
-    await getFollowersById()
+    // await getFollowersById()
 
     setIsShowPlash(false)
   }
@@ -46,15 +51,7 @@ const AppRouters = () => {
         res && dispatch(addAuth(JSON.parse(res)))
     }
 
-    const getFollowersById = async () => {
-      const api = `/get-followed-events?uid=${auth.id}`
 
-      try {
-        const res  = await userAPI.HandleUser(api)
-      } catch (error) {
-        console.log(error)
-      }
-    }
 
   return (
     <View>
