@@ -8,17 +8,20 @@ import { globalStyles } from '../../styles/globalStyles';
 import { fontFamily } from '../../constants/fontFamily';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { EventModel } from '../../models/EventModels';
-import { useSelector } from 'react-redux';
-import { authSelector } from '../../redux/reducers/authReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { authSelector, AuthState } from '../../redux/reducers/authReducer';
 import eventAPI from '../../apis/eventApi';
 import { LoadingModal } from '../../modals';
+import { UserHandle } from '../../utils/userHandlers';
+import { DateTime } from '../../utils/DateTime';
 
 const EventDetail = ({ navigation, route }: any) => {
   const { item }: { item: EventModel } = route.params;
   const [isLoading, setIsLoading] = useState(false);
   const [followers, setFollowers] = useState<string[]>([]);
 
-  const auth = useSelector(authSelector);
+  const auth : AuthState = useSelector(authSelector);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     item && getFollowersById()
@@ -54,7 +57,7 @@ const EventDetail = ({ navigation, route }: any) => {
   };
 
   const handleUpdateFollowers = async (data: string[]) => {
-    // await UserHandle.getFollowersById(auth.id, dispatch);
+    await UserHandle.getFollowersById(auth.id, dispatch);
 
     const api = `/update-followers`;
 
@@ -107,10 +110,10 @@ const EventDetail = ({ navigation, route }: any) => {
               <CardComponent
                 onPress={handleFlower}
                 styles={[globalStyles.noSpaceCard, { width: 36, height: 36 }]}
-                color={followers.includes(auth.id) ? "#ffffffB3" : "#ffffff4D"}>
+                color={auth.follow_events && auth.follow_events.includes(item._id) ? "#ffffffB3" : "#ffffff4D"}>
                 <MaterialIcons
                   name="bookmark"
-                  color={followers.includes(auth.id) ?
+                  color={auth.follow_events && auth.follow_events.includes(item._id) ?
                     appColors.danger2 :
                     appColors.white}
                   size={22}
@@ -186,7 +189,7 @@ const EventDetail = ({ navigation, route }: any) => {
                     justifyContent: 'space-around',
                   }}>
                   <TextComponent
-                    text="14 December, 2021"
+                    text={DateTime.GetDayString(item.date)}
                     font={fontFamily.medium}
                     size={16}
                   />
