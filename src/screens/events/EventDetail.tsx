@@ -14,6 +14,7 @@ import eventAPI from '../../apis/eventApi';
 import { LoadingModal } from '../../modals';
 import { UserHandle } from '../../utils/userHandlers';
 import { DateTime } from '../../utils/DateTime';
+import { appInfo } from '../../constants/appInfo';
 
 const EventDetail = ({ navigation, route }: any) => {
   const { item }: { item: EventModel } = route.params;
@@ -188,14 +189,16 @@ const EventDetail = ({ navigation, route }: any) => {
                     height: 48,
                     justifyContent: 'space-around',
                   }}>
-                  <TextComponent
-                    text={DateTime.GetDayString(item.date)}
-                    font={fontFamily.medium}
-                    size={16}
-                  />
-                  <TextComponent
-                    text="Tuesday, 4:00PM - 9:00PM"
-                    color={appColors.gray}
+                   <TextComponent
+                  text={`${DateTime.GetDate(new Date(item.date))}`}
+                  font={fontFamily.medium}
+                  size={16}
+                />
+                <TextComponent
+                  text={`${
+                    appInfo.dayNames[new Date(item.date).getDay()]
+                  }, ${DateTime.GetStartAndEnd(item.startAt, item.endAt)}`}
+                  color={appColors.gray}
                   />
                 </View>
               </RowComponent>
