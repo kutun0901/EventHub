@@ -8,17 +8,21 @@ import { globalStyles } from '../../styles/globalStyles';
 import { fontFamily } from '../../constants/fontFamily';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { EventModel } from '../../models/EventModels';
-import { useSelector } from 'react-redux';
-import { authSelector } from '../../redux/reducers/authReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { authSelector, AuthState } from '../../redux/reducers/authReducer';
 import eventAPI from '../../apis/eventApi';
 import { LoadingModal } from '../../modals';
+import { UserHandle } from '../../utils/userHandlers';
+import { DateTime } from '../../utils/DateTime';
+import { appInfo } from '../../constants/appInfo';
 
 const EventDetail = ({ navigation, route }: any) => {
   const { item }: { item: EventModel } = route.params;
   const [isLoading, setIsLoading] = useState(false);
   const [followers, setFollowers] = useState<string[]>([]);
 
-  const auth = useSelector(authSelector);
+  const auth: AuthState = useSelector(authSelector);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     item && getFollowersById()
@@ -54,7 +58,7 @@ const EventDetail = ({ navigation, route }: any) => {
   };
 
   const handleUpdateFollowers = async (data: string[]) => {
-    // await UserHandle.getFollowersById(auth.id, dispatch);
+    await UserHandle.getFollowersById(auth.id, dispatch);
 
     const api = `/update-followers`;
 
@@ -75,12 +79,8 @@ const EventDetail = ({ navigation, route }: any) => {
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
-      <ImageBackground
-        source={{ uri: item.photoUrl }}
-        style={{ flex: 1, height: 244 }}
-        imageStyle={{
-          resizeMode: 'cover',
-        }}>
+      <View style={{position: 'absolute', top: 0, right: 0, zIndex: 1, left: 0}}
+        >
         <LinearGradient colors={['rgba(0,0,0,0.7)', 'rgba(0,0,0,0)']}>
           <RowComponent
             styles={{
@@ -107,10 +107,10 @@ const EventDetail = ({ navigation, route }: any) => {
               <CardComponent
                 onPress={handleFlower}
                 styles={[globalStyles.noSpaceCard, { width: 36, height: 36 }]}
-                color={followers.includes(auth.id) ? "#ffffffB3" : "#ffffff4D"}>
+                color={auth.follow_events && auth.follow_events.includes(item._id) ? "#ffffffB3" : "#ffffff4D"}>
                 <MaterialIcons
                   name="bookmark"
-                  color={followers.includes(auth.id) ?
+                  color={auth.follow_events && auth.follow_events.includes(item._id) ?
                     appColors.danger2 :
                     appColors.white}
                   size={22}
@@ -186,12 +186,13 @@ const EventDetail = ({ navigation, route }: any) => {
                     justifyContent: 'space-around',
                   }}>
                   <TextComponent
-                    text="14 December, 2021"
+                    text={`${DateTime.GetDate(new Date(item.date))}`}
                     font={fontFamily.medium}
                     size={16}
                   />
                   <TextComponent
-                    text="Tuesday, 4:00PM - 9:00PM"
+                    text={`${appInfo.dayNames[new Date(item.date).getDay()]
+                      }, ${DateTime.GetStartAndEnd(item.startAt, item.endAt)}`}
                     color={appColors.gray}
                   />
                 </View>
@@ -210,10 +211,11 @@ const EventDetail = ({ navigation, route }: any) => {
                 <View
                   style={{
                     flex: 1,
-                    height: 48,
+                    minHeight: 48,
                     justifyContent: 'space-around',
                   }}>
                   <TextComponent
+                    // numOfLine={1}
                     text={item.locationTitle}
                     font={fontFamily.medium}
                     size={16}
@@ -258,12 +260,13 @@ const EventDetail = ({ navigation, route }: any) => {
             <TabBarComponent title="About Event" />
             <SectionComponent>
               <TextComponent
-                text={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis necessitatibus ratione asperiores odit exercitationem repellat aliquam at officiis, quasi natus? Consequatur, amet! Iusto velit vitae quidem autem maxime qui exercitationem.`}
+              text={item.description}
               />
             </SectionComponent>
           </View>
+          <SpaceComponent height={80}/>
         </ScrollView>
-      </ImageBackground>
+      </View>
 
       <LinearGradient
         colors={['rgba(255, 255, 255, 0.9)', 'rgba(255, 255, 255, 1)']}
