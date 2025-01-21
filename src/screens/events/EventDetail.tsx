@@ -21,7 +21,7 @@ const EventDetail = ({ navigation, route }: any) => {
   const [isLoading, setIsLoading] = useState(false);
   const [followers, setFollowers] = useState<string[]>([]);
 
-  const auth : AuthState = useSelector(authSelector);
+  const auth: AuthState = useSelector(authSelector);
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -79,12 +79,8 @@ const EventDetail = ({ navigation, route }: any) => {
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
-      <ImageBackground
-        source={{ uri: item.photoUrl }}
-        style={{ flex: 1, height: 244 }}
-        imageStyle={{
-          resizeMode: 'cover',
-        }}>
+      <View style={{position: 'absolute', top: 0, right: 0, zIndex: 1, left: 0}}
+        >
         <LinearGradient colors={['rgba(0,0,0,0.7)', 'rgba(0,0,0,0)']}>
           <RowComponent
             styles={{
@@ -189,16 +185,15 @@ const EventDetail = ({ navigation, route }: any) => {
                     height: 48,
                     justifyContent: 'space-around',
                   }}>
-                   <TextComponent
-                  text={`${DateTime.GetDate(new Date(item.date))}`}
-                  font={fontFamily.medium}
-                  size={16}
-                />
-                <TextComponent
-                  text={`${
-                    appInfo.dayNames[new Date(item.date).getDay()]
-                  }, ${DateTime.GetStartAndEnd(item.startAt, item.endAt)}`}
-                  color={appColors.gray}
+                  <TextComponent
+                    text={`${DateTime.GetDate(new Date(item.date))}`}
+                    font={fontFamily.medium}
+                    size={16}
+                  />
+                  <TextComponent
+                    text={`${appInfo.dayNames[new Date(item.date).getDay()]
+                      }, ${DateTime.GetStartAndEnd(item.startAt, item.endAt)}`}
+                    color={appColors.gray}
                   />
                 </View>
               </RowComponent>
@@ -216,10 +211,11 @@ const EventDetail = ({ navigation, route }: any) => {
                 <View
                   style={{
                     flex: 1,
-                    height: 48,
+                    minHeight: 48,
                     justifyContent: 'space-around',
                   }}>
                   <TextComponent
+                    // numOfLine={1}
                     text={item.locationTitle}
                     font={fontFamily.medium}
                     size={16}
@@ -264,12 +260,13 @@ const EventDetail = ({ navigation, route }: any) => {
             <TabBarComponent title="About Event" />
             <SectionComponent>
               <TextComponent
-                text={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis necessitatibus ratione asperiores odit exercitationem repellat aliquam at officiis, quasi natus? Consequatur, amet! Iusto velit vitae quidem autem maxime qui exercitationem.`}
+              text={item.description}
               />
             </SectionComponent>
           </View>
+          <SpaceComponent height={80}/>
         </ScrollView>
-      </ImageBackground>
+      </View>
 
       <LinearGradient
         colors={['rgba(255, 255, 255, 0.9)', 'rgba(255, 255, 255, 1)']}

@@ -1,11 +1,12 @@
 import { StatusBar } from 'react-native'
-import React, { } from 'react'
+import React, { useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import store from './src/redux/store';
 import { Provider } from 'react-redux'
 import AppRouters from './src/navigators/AppRouters';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Host } from 'react-native-portalize';
+import { HandleNotification } from './src/utils/HandleNotification';
 
 const App = () => {
 
@@ -16,6 +17,9 @@ const App = () => {
   // const [accessToken, setAccessToken] = useState('')
 
 
+  useEffect(() => {
+    HandleNotification.checkNotificationPerson();
+  }, [])
   // useEffect(() => {
   //   checkLogin()
   // }, [])
