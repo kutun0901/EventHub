@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import messaging from '@react-native-firebase/messaging'
 import { Platform } from 'react-native';
+import userAPI from '../apis/userApi';
 
 
 export class HandleNotification{
@@ -48,7 +49,23 @@ export class HandleNotification{
           if (fcmTokens && !fcmTokens.includes(token)) {
             fcmTokens.push(token);
 
+            await this.Update(auth.id, fcmTokens);
           }
+        }
+      };
+
+      static Update = async (id: string, fcmTokens: string[]) => {
+        try {
+          await userAPI.HandleUser(
+            '/update-fcmtoken',
+            {
+              uid: id,
+              fcmTokens,
+            },
+            'post',
+          );
+        } catch (error) {
+          console.log(`Can not update tokens ${error}`);
         }
       };
 
